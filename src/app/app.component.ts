@@ -4,17 +4,19 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {HomePage} from '../pages/home/home';
+import {DatabaseProvider} from "../providers/database/database";
 
 @Component({
   templateUrl: 'app.html'
 })
-export class JewelleryIonicApp {
+export class XsourceApp {
   rootPage: any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private database: DatabaseProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.database.initDb();
       statusBar.styleDefault();
       splashScreen.hide();
     });

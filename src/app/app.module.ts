@@ -1,40 +1,50 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import {NgModule, ErrorHandler} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {XsourceApp} from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import {HttpModule} from '@angular/http';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+
+import {HomePage} from '../pages/home/home';
+import {InterestsPage} from '../pages/interests/interests';
+import {SearchResultPage} from '../pages/search-result/search-result';
+
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {InterestsPageModule} from "../pages/interests/interests.module";
+import {CategoryProvider} from '../providers/category/category';
+import {SQLite} from "@ionic-native/sqlite";
+import { DatabaseProvider } from '../providers/database/database';
 
 @NgModule({
   declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
+    XsourceApp,
     HomePage,
-    TabsPage
+    SearchResultPage,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(XsourceApp),
+    HttpModule,
+    InterestsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
+    XsourceApp,
     HomePage,
-    TabsPage
+    InterestsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CategoryProvider,
+    SQLite,
+    DatabaseProvider
   ]
 })
-export class AppModule {}
+
+export class AppModule {
+  content = ['home']
+}

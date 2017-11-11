@@ -1,0 +1,47 @@
+page-interests {
+  .category-card {
+    position: relative;
+    margin: 0;
+    width: auto;
+    h2 {
+      text-align: center;
+      text-transform: capitalize;
+    }
+    .check-badge {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($primaryColor, 0.6);
+      .check-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        margin: auto 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        //border: 2px solid $secondaryColor;
+      }
+    }
+  }
+  .footer {
+    position: absolute;
+    transition: all 0.5s;
+  }
+}
+
+/*******************/
+/*responsive styles*/
+/*******************/
+
+@media screen and (max-width: 320px) {
+
+  page-interests {
+    .category-card {
+      h2 {
+        font-size: 1em;
+      }
+    }
+  }
+}

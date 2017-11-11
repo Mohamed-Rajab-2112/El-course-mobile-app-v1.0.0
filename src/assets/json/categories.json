@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "english",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 2,
+      "name": "web dev",
+      "image": "assets/images/web-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 3,
+      "name": "russian",
+      "image": "assets/images/russian-category.svg",
+      "coursesCount": 25
+    },
+    {
+      "id": 4,
+      "name": "chemist",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 5,
+      "name": "architecture",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 6,
+      "name": "telecom",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 7,
+      "name": "civil",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 8,
+      "name": "management",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 9,
+      "name": "human resources",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 10,
+      "name": "mobile dev",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 11,
+      "name": "computer science",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    },
+    {
+      "id": 12,
+      "name": "art",
+      "image": "assets/images/english-category.jpg",
+      "coursesCount": 25
+    }
+  ]
+}
