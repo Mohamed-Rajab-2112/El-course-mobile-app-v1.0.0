@@ -2,75 +2,111 @@
   "categories": [
     {
       "id": 1,
-      "name": "english",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 2,
-      "name": "web dev",
-      "image": "assets/images/web-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 3,
-      "name": "russian",
-      "image": "assets/images/russian-category.svg",
-      "coursesCount": 25
+      "mainCategory": "language",
+      "subCategories": [
+        {
+          "id": 1,
+          "name": "english",
+          "image": "assets/images/english-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 2,
+          "name": "russian",
+          "image": "assets/images/russian-category.svg",
+          "coursesCount": 25
+        }
+      ]
     },
     {
       "id": 4,
-      "name": "chemist",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
+      "mainCategory": "engineering",
+      "subCategories": [
+        {
+          "id": 1,
+          "name": "architecture",
+          "image": "assets/images/architecture-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 2,
+          "name": "telecom",
+          "image": "assets/images/telecom-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 3,
+          "name": "civil",
+          "image": "assets/images/civil-category.jpg",
+          "coursesCount": 25
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "mainCategory": "science",
+      "subCategories": [
+        {
+          "id": 1,
+          "name": "chemist",
+          "image": "assets/images/chemist-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 2,
+          "name": "computer science",
+          "image": "assets/images/computer-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 3,
+          "name": "art",
+          "image": "assets/images/art-category.jpg",
+          "coursesCount": 25
+        }
+      ]
     },
     {
       "id": 5,
-      "name": "architecture",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
+      "mainCategory": "business",
+      "subCategories": [
+        {
+          "id": 1,
+          "name": "management",
+          "image": "assets/images/management-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 2,
+          "name": "human resources",
+          "image": "assets/images/hr-category.jpg",
+          "coursesCount": 25
+        }
+      ]
     },
     {
-      "id": 6,
-      "name": "telecom",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 7,
-      "name": "civil",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 8,
-      "name": "management",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 9,
-      "name": "human resources",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 10,
-      "name": "mobile dev",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 11,
-      "name": "computer science",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
-    },
-    {
-      "id": 12,
-      "name": "art",
-      "image": "assets/images/english-category.jpg",
-      "coursesCount": 25
+      "id": 2,
+      "mainCategory": "development",
+      "subCategories": [
+        {
+          "id": 1,
+          "name": "android dev",
+          "image": "assets/images/android-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 2,
+          "name": "ios dev",
+          "image": "assets/images/ios-category.jpg",
+          "coursesCount": 25
+        },
+        {
+          "id": 3,
+          "name": "web dev",
+          "image": "assets/images/web-category.jpg",
+          "coursesCount": 25
+        }
+      ]
     }
   ]
 }

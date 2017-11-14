@@ -1,12 +1,13 @@
 <ion-header>
-  <ion-navbar color="dark">
+  <ion-navbar color="dark" hideBackButton>
     <ion-grid>
-
       <ion-row align-items-start>
         <ion-col col-1>
-          <button menuToggle ion-button>
-            <ion-icon name="menu"></ion-icon>
-          </button>
+          <ion-buttons>
+            <button (click)="openMenu()" ion-button>
+              <ion-icon  name="menu" class="menu-icon"></ion-icon>
+            </button>
+          </ion-buttons>
         </ion-col>
         <ion-col align-self-center>
           <ion-title>Home</ion-title>

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 // import {Router} from '@angular/router'
+import { MenuController } from 'ionic-angular';
 
 // import {SearchResultPage} from '../search-result/search-result'
 import {InterestsPage} from "../interests/interests";
@@ -12,7 +13,7 @@ import {InterestsPage} from "../interests/interests";
 export class HomePage {
   myInput: string;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private menuCtrl: MenuController) {
 
   }
 
@@ -23,6 +24,10 @@ export class HomePage {
 
   onCancel(cancel) {
     console.log(cancel);
+  }
+
+  openMenu() {
+    this.menuCtrl.toggle();
   }
 
   routeToDetails() {

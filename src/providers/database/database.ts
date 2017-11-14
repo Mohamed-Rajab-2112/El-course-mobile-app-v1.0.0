@@ -22,8 +22,12 @@ export class DatabaseProvider {
       .then((db: SQLiteObject) => {
         this.db = db;
         db.executeSql('create table if not exists userInterestsCategories (id INT, name VARCHAR(25))', {})
-          .then(() => alert('table created successfully'))
-          .catch(e => alert(JSON.stringify(e)));
+          .then(() => {
+            // alert('table created successfully')
+          })
+          .catch(e => {
+            alert(JSON.stringify(e))
+          });
       })
       .catch((e) => {
         console.log(e);
@@ -31,15 +35,18 @@ export class DatabaseProvider {
   }
 
   insertUserCategories(userCategories) {
-    for (let category of userCategories) {
-      this.db.executeSql('insert into userInterestsCategories (id, name) values (?,?)', [category.id, category.name])
-        .then(() => {
-          alert('inserted successfully');
-        })
-        .catch((err) => {
-          alert(JSON.stringify(err));
-        })
-    }
+    return new Promise((resolve, reject) => {
+      for (let category of userCategories) {
+        this.db.executeSql('insert into userInterestsCategories (id, name) values (?,?)', [category.id, category.name])
+          .then(() => {
+            resolve('success');
+            // alert('inserted successfully');
+          })
+          .catch((err) => {
+            reject(JSON.stringify(err));
+          })
+      }
+    })
   }
 
   // onDevice() {
