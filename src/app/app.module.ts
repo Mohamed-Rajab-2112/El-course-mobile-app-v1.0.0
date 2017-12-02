@@ -19,19 +19,30 @@ import {SQLite} from "@ionic-native/sqlite";
 import {DatabaseProvider} from '../providers/database/database';
 
 import {IonicStorageModule} from '@ionic/storage';
-// import {Geolocation} from '@ionic-native/geolocation';
+import {Geolocation} from '@ionic-native/geolocation';
 
 /*pipes*/
 import {PipesModule} from '../pipes/pipes.module';
 import {UtilitiesProvider} from '../providers/utilities/utilities';
 import {ManuallyLocationPage} from "../pages/manually-location/manually-location";
 import {ManuallyLocationPageModule} from "../pages/manually-location/manually-location.module";
+import {StudentProvider} from '../providers/student/student';
+import {ApiUrlProvider} from '../providers/api-url/api-url';
+import {GuestProvider} from '../providers/guest/guest';
+
+import {AuthProvider} from '../providers/auth/auth';
+
+import {NativeStorage} from '@ionic-native/native-storage';
+import {CategoriesPageModule} from "../pages/categories/categories.module";
+import {CategoriesPage} from "../pages/categories/categories";
+import {ComponentsModule} from "../components/components.module";
 
 @NgModule({
   declarations: [
     XsourceApp,
-    HomePage,
+    // HomePage,
     SearchResultPage,
+    CategoriesPage
   ],
   imports: [
     BrowserModule,
@@ -41,15 +52,19 @@ import {ManuallyLocationPageModule} from "../pages/manually-location/manually-lo
     PipesModule,
     LocationPageModule,
     ManuallyLocationPageModule,
+    // CategoriesPageModule,
+    ComponentsModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     XsourceApp,
-    HomePage,
+    // HomePage,
+    CategoriesPage,
     InterestsPage,
     LocationPage,
-    ManuallyLocationPage
+    ManuallyLocationPage,
+    // CategoriesPage
   ],
   providers: [
     StatusBar,
@@ -57,9 +72,14 @@ import {ManuallyLocationPageModule} from "../pages/manually-location/manually-lo
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoryProvider,
     SQLite,
-    // Geolocation,
+    Geolocation,
     DatabaseProvider,
-    UtilitiesProvider
+    UtilitiesProvider,
+    StudentProvider,
+    ApiUrlProvider,
+    GuestProvider,
+    AuthProvider,
+    NativeStorage
   ]
 })
 

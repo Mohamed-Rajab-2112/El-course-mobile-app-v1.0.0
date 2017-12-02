@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "course 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "phone": "+2 0114587444",
+    "latitude": "12548777",
+    "longitude": "5874456"
+  },
+  {
+    "id": 2,
+    "name": "course 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training 1",
+    "phone": "+2 0114587444",
+    "latitude": "12548777",
+    "longitude": "5874456"
+  },
+  {
+    "id": 3,
+    "name": "course 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "phone": "+2 0114587444",
+    "latitude": "12548777",
+    "longitude": "5874456"
+  }
+]

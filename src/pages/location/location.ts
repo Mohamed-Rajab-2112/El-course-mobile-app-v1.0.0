@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {ManuallyLocationPage} from "../manually-location/manually-location";
 import {Geolocation} from '@ionic-native/geolocation';
+import {timeout} from "rxjs/operator/timeout";
 
 
 @IonicPage()
@@ -12,7 +13,7 @@ import {Geolocation} from '@ionic-native/geolocation';
 })
 export class LocationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation) {
   }
 
   ionViewDidLoad() {
@@ -24,7 +25,7 @@ export class LocationPage {
   }
 
   activateGPS() {
-    Geolocation.getCurrentPosition().then((resp) => {
+    this.geo.getCurrentPosition({timeout: 15000, enableHighAccuracy: true}).then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
       alert(JSON.stringify(resp));

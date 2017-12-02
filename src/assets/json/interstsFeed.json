@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 4.5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed long name dasourse 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center long name 1",
+    "rating": 3,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 3.5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center long name 1",
+    "rating": 3,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 3.5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 5,
+    "fakePrice": 1500,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center long name 1",
+    "rating": 3,
+    "fakePrice": 1500,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 3.5,
+    "fakePrice": 1500,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 5,
+    "fakePrice": 1500,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center long name 1",
+    "rating": 3,
+    "fakePrice": 1500,
+    "price": 1450
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 3.5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center long name 1",
+    "rating": 3,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 3.5,
+    "fakePrice": 1450,
+    "price": 1500
+  },
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "image": "assets/images/courses-img/course-img-template.jpg",
+    "trainingCenter": "training center 1",
+    "rating": 5,
+    "fakePrice": 1450,
+    "price": 1500
+  }
+]

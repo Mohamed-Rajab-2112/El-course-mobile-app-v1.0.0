@@ -5,17 +5,19 @@
         <ion-col col-1>
           <ion-buttons>
             <button (click)="openMenu()" ion-button>
-              <ion-icon  name="menu" class="menu-icon"></ion-icon>
+              <ion-icon name="menu" class="menu-icon"></ion-icon>
             </button>
           </ion-buttons>
         </ion-col>
         <ion-col align-self-center>
-          <ion-title>Home</ion-title>
+          <ion-title><span
+
+
+          >Xsource</span></ion-title>
         </ion-col>
       </ion-row>
       <ion-row justify-content-center>
-        <!--&lt;!&ndash;</ion-col>&ndash;&gt;-->
-        <ion-col col-11>
+        <ion-col col-12>
           <ion-searchbar
             [(ngModel)]="myInput"
             [showCancelButton]="false"
@@ -24,7 +26,6 @@
           </ion-searchbar>
         </ion-col>
       </ion-row>
-      <!--</ion-row>-->
     </ion-grid>
 
   </ion-navbar>
@@ -32,8 +33,44 @@
 
 <ion-content padding>
 
-  <button ion-button (click)="routeToDetails()"> GO!</button>
+  <!--courses have been joined-->
+  <!--========================-->
 
-  <page-search-result></page-search-result>
+  <!--<div>-->
+    <!--<ion-title class="title">Courses You have <strong class="strong-title">joined!</strong></ion-title>-->
+    <!--<ion-list>-->
+      <!--<ion-item *ngFor="let course of joinedCourses">-->
+        <!--<img item-start col-5 [src]="course.image">-->
+        <!--<div col-7>-->
+          <!--<h4>{{course.name}}</h4>-->
+          <!--<h5>{{course.trainingCenter}}</h5>-->
+          <!--&lt;!&ndash;<h5>{{course.phone}}</h5>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<ion-row justify-content-around>-->
+            <!--<button col-4 ion-button color="primary" clear><i class="fa fa-graduation-cap" aria-hidden="true"></i></button>-->
+          <!--<button col-4 ion-button color="primary" clear>-->
+            <!--<ion-icon name="call"></ion-icon>-->
+          <!--</button>-->
+          <!--<button col-4 ion-button color="primary" clear><i class="fa fa-map-marker" aria-hidden="true"></i></button>-->
+        <!--</ion-row>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
+  <!--</div>-->
+
+  <!--courses based on student interests-->
+  <!--==================================-->
+
+  <!--<ion-title>Based on your <strong class="strong-title">Interest!</strong></ion-title>-->
+  <!--<ion-grid>-->
+    <!--<ion-row justify-content-start>-->
+      <!--<ion-col align-items-start *ngFor="let course of feedCourses" col-6 col-sm-4>-->
+        <!--<course-thumbnail ion-row [course]="course"></course-thumbnail>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-grid>-->
+
+  <!--<button ion-button (click)="routeToDetails()"> GO!</button>-->
+
+  <!--<page-search-result></page-search-result>-->
 
 </ion-content>

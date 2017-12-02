@@ -1,0 +1,19 @@
+<ion-card class="course-thumbnail-card">
+  <img [src]="course.image">
+  <ion-card-content>
+    <h3 class="sub-title">{{course.name}}</h3>
+    <h4>{{course.trainingCenter}}</h4>
+    <!--<ion-row>-->
+    <!--<ion-col col-12>-->
+    <rating style="width: 100%;" class="rating" [(ngModel)]="course.rating"
+            readOnly="true"
+            max="5"
+    >
+    </rating>
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+    <h5 class="fake-price">{{course.fakePrice}}</h5>
+    <h5 class="price">{{course.price}}</h5>
+    <span>EGP</span>
+  </ion-card-content>
+</ion-card>

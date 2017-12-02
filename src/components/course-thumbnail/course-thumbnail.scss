@@ -1,0 +1,32 @@
+course-thumbnail {
+  .course-thumbnail-card {
+    margin: 0;
+    width: auto;
+    //height: 210px;
+    .sub-title, h4 {
+      //display: inline-block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden !important;
+      text-overflow: ellipsis;
+    }
+    h4 {
+      text-transform: capitalize;
+    }
+    .fake-price {
+      text-decoration: line-through;
+      color: grey;
+      display: inline;
+      font-size: 0.7em;
+    }
+    .price {
+      font-weight: bold;
+      display: inline;
+      font-size: 1.1em;
+      color: $mid;
+    }
+    span {
+      color: $mid;
+    }
+  }
+}

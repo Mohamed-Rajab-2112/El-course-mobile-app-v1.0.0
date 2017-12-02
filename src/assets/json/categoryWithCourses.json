@@ -1,0 +1,290 @@
+[
+  {
+    "categoryName": "Web Development",
+    "categoryIcon": "fa fa-code",
+    "categoryCourses": [
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      }
+    ]
+  },
+  {
+    "categoryName": "Android Development",
+    "categoryIcon": "fa fa-android",
+    "categoryCourses": [
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      }
+    ]
+  },
+  {
+    "categoryName": "IOS Development",
+    "categoryIcon": "fa fa-apple",
+    "categoryCourses": [
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      },
+      {
+        "id": 1,
+        "name": "course 1",
+        "image": "assets/images/courses-img/course-img-template.jpg",
+        "trainingCenter": "training center 1",
+        "rating": 5,
+        "fakePrice": 1500,
+        "price": 1500
+      }
+    ]
+  }
+]

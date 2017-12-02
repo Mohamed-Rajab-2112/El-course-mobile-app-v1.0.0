@@ -1,5 +1,44 @@
-page-home {
-  .menu-icon {
-  font-size: 1.7em;
+@import "../../theme/style-utility";
+
+//page-home {
+.menu-icon {
+  font-size: 2.2em;
+}
+
+ion-content {
+  .toolbar-title-md {
+    text-transform: capitalize;
+    color: $dark;
+    .strong-title {
+      text-decoration: underline;
+      color: $dark;
+      text-transform: uppercase;
+    }
+  }
+  ion-list {
+    ion-item {
+      h4, h5 {
+        color: $dark;
+      }
+      h4 {
+        font-size: 0.95em !important;
+        text-transform: uppercase;
+        font-weight: bold !important;
+      }
+      h5 {
+        text-transform: capitalize;
+        font-size: 0.8em;
+      }
+      button {
+        margin: 0 !important;
+        padding: 0;
+        //border: 1px solid black !important;
+        .fa, ion-icon {
+          font-size: 1.5em;
+        }
+      }
+    }
   }
 }
+
+//}
