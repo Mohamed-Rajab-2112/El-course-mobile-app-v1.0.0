@@ -1,0 +1,49 @@
+page-training-center-details {
+  .header {
+    //text-align: center;
+    //background-color: white;
+    //background-image: url("./../assets/images/HeaderImage.jpg");
+    //background-position: center center;
+    //background-attachment: scroll;
+    //margin-top: 20px;
+    background-size: cover;
+    width: 100%;
+    ion-row:first-child {
+      margin-top: 15px;
+    }
+    .logo-container {
+      //padding-top: 25px;
+      width: 90%;
+      img {
+        border: 3px solid white;
+        margin-bottom: 0;
+      }
+      .area {
+        text-align: center;
+        padding: 5px;
+        background-color: white;
+        margin-top: 0;
+        margin-bottom: 0;
+        //height: 100%;
+      }
+    }
+    .description {
+      margin-top: 0;
+      margin-bottom: 0;
+      background-color: white;
+      padding: 10px;
+      height: 100%;
+      ion-col {
+        background-color: white;
+        p {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+
+  .page-body {
+    //width: 90%;
+    margin: 15px auto 0;
+  }
+}

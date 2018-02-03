@@ -16,4 +16,10 @@ export class StudentProvider {
     })
   }
 
+  postQuestions(questions) {
+    return this.http.post(this.apiUrl.getUrl().postQuestions, questions).map((response: Response) => {
+      return response.json();
+    })
+  }
+
 }

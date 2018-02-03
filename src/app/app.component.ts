@@ -4,22 +4,25 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {NativeStorage} from '@ionic-native/native-storage';
 import {Nav} from 'ionic-angular';
+import {Keyboard} from '@ionic-native/keyboard';
 
 import {HomePage} from '../pages/home/home';
-import {InterestsPage} from '../pages/interests/interests';
+// import {InterestsPage} from '../pages/interests/interests';
 // import {LocationPage} from '../pages/location/location';
 // import {CountryModalPage} from '../pages/country-modal/country-modal';
 import {AlertController} from 'ionic-angular';
 import {DatabaseProvider} from "../providers/database/database";
 import {AuthProvider} from "../providers/auth/auth";
 import {GuestProvider} from "../providers/guest/guest";
+import {Content} from 'ionic-angular';
 
 // import {ModalController, NavParams} from 'ionic-angular';
 import {UtilitiesProvider} from "../providers/utilities/utilities";
 import {CategoriesPage} from "../pages/categories/categories";
+import {TrainingCentersPage} from "../pages/training-centers/training-centers";
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
 export class XsourceApp {
   rootPage: any;
@@ -27,8 +30,9 @@ export class XsourceApp {
   languages: any[];
   countries: any[];
   @ViewChild(Nav) nav: Nav;
+  @ViewChild(Content) content: Content;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private database: DatabaseProvider, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private database: DatabaseProvider, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private keyboard: Keyboard) {
     platform.ready().then(() => {
 
       this.rootPage = CategoriesPage;
@@ -63,43 +67,53 @@ export class XsourceApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.database.initDb();
-      statusBar.styleDefault();
+      // statusBar.styleDefault();
       splashScreen.hide();
       // this.rootPage = LocationPage;
     });
 
     /*Get languages*/
     /*-------------*/
-    // this.guestProvider.getLanguage().subscribe((languages) => {
-    //   this.languages = [];
-    //   languages.map((lang) => {
-    //     this.languages.push({
-    //       type: 'radio',
-    //       value: lang.id,
-    //       label: lang.name
-    //     });
-    //   })
-    // });
+    this.guestProvider.getLanguage().subscribe((languages) => {
+      this.languages = [];
+      languages.map((lang) => {
+        this.languages.push({
+          type: 'radio',
+          value: lang.id,
+          label: lang.name
+        });
+      })
+    });
 
     /*Get countries*/
     /*-------------*/
-    // this.guestProvider.getCountries().subscribe((countries) => {
-    //   this.countries = [];
-    //   countries.map((country) => {
-    //     this.countries.push({
-    //       type: 'radio',
-    //       value: country.id,
-    //       label: country.name
-    //     });
-    //   })
-    // })
+    this.guestProvider.getCountries().subscribe((countries) => {
+      this.countries = [];
+      countries.map((country) => {
+        this.countries.push({
+          type: 'radio',
+          value: country.id,
+          label: country.name
+        });
+      })
+    })
   }
 
   /*routing functions*/
+
   /*=================*/
+
+  scrollToTop() {
+
+    this.content.scrollToTop();
+  }
 
   routeToHome() {
     this.nav.popToRoot(HomePage);
+  }
+
+  routeToTrainingCenter() {
+    this.nav.push(TrainingCentersPage);
   }
 
   // routeToCategories() {
@@ -108,77 +122,79 @@ export class XsourceApp {
   // }
 
   /*prompt for choosing country*/
+
   /*===========================*/
 
-  // promptChooseCountry() {
-  //   console.log('country prompt');
-  //   this.storage.getItem('countryId')
-  //     .then((val) => {
-  //       this.countries.map((country) => {
-  //         country.checked = country.value === val;
-  //       })
-  //     })
-  //     .catch(() => {
-  //       console.log('the first time to choose country')
-  //     }).then(() => {
-  //     let alert = this.alertCtrl.create({
-  //       title: "Choose Country",
-  //       message: "Please choose your preferred country",
-  //       inputs: this.countries,
-  //       buttons: [
-  //         {
-  //           text: 'Cancel',
-  //           role: 'cancel'
-  //         },
-  //         {
-  //           text: 'Submit',
-  //           handler: (data) => {
-  //             this.storage.setItem('countryId', data);
-  //             this.nav.popToRoot();
-  //           }
-  //         }
-  //       ]
-  //     });
-  //     alert.present();
-  //   });
-  // }
+  promptChooseCountry() {
+    console.log('country prompt');
+    this.storage.getItem('countryId')
+      .then((val) => {
+        this.countries.map((country) => {
+          country.checked = country.value === val;
+        })
+      })
+      .catch(() => {
+        console.log('the first time to choose country')
+      }).then(() => {
+      let alert = this.alertCtrl.create({
+        title: "Choose Country",
+        message: "Please choose your preferred country",
+        inputs: this.countries,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel'
+          },
+          {
+            text: 'Submit',
+            handler: (data) => {
+              this.storage.setItem('countryId', data);
+              this.nav.popToRoot();
+            }
+          }
+        ]
+      });
+      alert.present();
+    });
+  }
 
   /*prompt for choosing language*/
+
   /*============================*/
 
-  // promptChooseLanguage() {
-  //   console.log('language prompt');
-  //   this.storage.getItem('languageId')
-  //     .then((val) => {
-  //       this.languages.map((lang) => {
-  //         console.log(lang.value);
-  //         console.log(val);
-  //         lang.checked = lang.value === val;
-  //       })
-  //     })
-  //     .catch(() => {
-  //       console.log('the first time to choose lang')
-  //     }).then(() => {
-  //     let alert = this.alertCtrl.create({
-  //       title: "Choose Language",
-  //       message: "Please choose your preferred language",
-  //       inputs: this.languages,
-  //       buttons: [
-  //         {
-  //           text: 'Cancel',
-  //           role: 'cancel'
-  //         },
-  //         {
-  //           text: 'Submit',
-  //           handler: (data) => {
-  //             this.storage.setItem('languageId', data);
-  //             this.nav.popToRoot();
-  //           }
-  //         }
-  //       ]
-  //     });
-  //     alert.present();
-  //   });
-  //
-  // }
+  promptChooseLanguage() {
+    console.log('language prompt');
+    this.storage.getItem('languageId')
+      .then((val) => {
+        this.languages.map((lang) => {
+          console.log(lang.value);
+          console.log(val);
+          lang.checked = lang.value === val;
+        })
+      })
+      .catch(() => {
+        console.log('the first time to choose lang')
+      }).then(() => {
+      let alert = this.alertCtrl.create({
+        title: "Choose Language",
+        message: "Please choose your preferred language",
+        inputs: this.languages,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel'
+          },
+          {
+            text: 'Submit',
+            handler: (data) => {
+              this.storage.setItem('languageId', data);
+              this.nav.popToRoot();
+            }
+          }
+        ]
+      });
+      alert.present();
+    });
+
+  }
 }

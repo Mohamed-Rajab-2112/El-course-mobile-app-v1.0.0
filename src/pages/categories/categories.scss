@@ -1,42 +1,4 @@
 @import "../../theme/style-utility";
 
 page-categories {
-  .category-Container {
-    height: 225px;
-  }
-  .category-title {
-    background-color: $light;
-    box-sizing: border-box;
-    //border: 1px solid $mid;
-    height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    i {
-      font-size: 1.5em;
-    }
-    h4 {
-      font-size: 0.8em;
-    }
-    button {
-      font-size: 0.6em;
-      height: 2.5rem;
-    }
-  }
-  ion-scroll {
-    height: 225px;
-    .thumbnail-container {
-      height: 225px;
-      course-thumbnail {
-        margin: 7px;
-        &:last-child {
-          padding-right: 5px;
-        }
-      }
-    }
-    .scroll-content {
-      padding: 0 !important;
-    }
-  }
 }

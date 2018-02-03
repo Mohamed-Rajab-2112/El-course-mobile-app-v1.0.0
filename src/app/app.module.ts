@@ -20,6 +20,7 @@ import {DatabaseProvider} from '../providers/database/database';
 
 import {IonicStorageModule} from '@ionic/storage';
 import {Geolocation} from '@ionic-native/geolocation';
+import {Keyboard} from '@ionic-native/keyboard';
 
 /*pipes*/
 import {PipesModule} from '../pipes/pipes.module';
@@ -33,9 +34,13 @@ import {GuestProvider} from '../providers/guest/guest';
 import {AuthProvider} from '../providers/auth/auth';
 
 import {NativeStorage} from '@ionic-native/native-storage';
-import {CategoriesPageModule} from "../pages/categories/categories.module";
+import {TrainingCentersPageModule} from "../pages/training-centers/training-centers.module";
+import {TrainingCenterDetailsPageModule} from "../pages/training-center-details/training-center-details.module";
 import {CategoriesPage} from "../pages/categories/categories";
 import {ComponentsModule} from "../components/components.module";
+import {QuestionsPageModule} from "../pages/questions/questions.module";
+// import {SignInPage} from "../pages/sign-in/sign-in";
+import {SignInPageModule} from "../pages/sign-in/sign-in.module";
 
 @NgModule({
   declarations: [
@@ -46,15 +51,22 @@ import {ComponentsModule} from "../components/components.module";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(XsourceApp),
+    IonicModule.forRoot(XsourceApp, {
+      scrollAssist: false,
+      autoFocusAssist: false,
+      // pageTransition: 'ios-transition'
+    }),
     HttpModule,
     InterestsPageModule,
     PipesModule,
     LocationPageModule,
     ManuallyLocationPageModule,
-    // CategoriesPageModule,
+    TrainingCentersPageModule,
     ComponentsModule,
-    IonicStorageModule.forRoot()
+    TrainingCenterDetailsPageModule,
+    QuestionsPageModule,
+    SignInPageModule,
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,7 +91,8 @@ import {ComponentsModule} from "../components/components.module";
     ApiUrlProvider,
     GuestProvider,
     AuthProvider,
-    NativeStorage
+    NativeStorage,
+    Keyboard
   ]
 })
 

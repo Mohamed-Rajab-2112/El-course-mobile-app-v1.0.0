@@ -32,4 +32,16 @@ export class GuestProvider {
       return response.json();
     })
   }
+
+  getTrainingCenters() {
+    return this.http.get(this.apiUrl.getUrl().trainingCenters).map((response: Response) => {
+      return response.json();
+    })
+  }
+
+  getTrainingCenterById(id) {
+    return this.http.get(this.apiUrl.getUrl().trainingCenterDetails).map((response: Response) => {
+      return response.json();
+    })
+  }
 }

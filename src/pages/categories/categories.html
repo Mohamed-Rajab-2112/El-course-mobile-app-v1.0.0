@@ -39,28 +39,10 @@
 </ion-header>
 
 
-<ion-content padding>
-
-  <!--<ion-row *ngFor="let categoryCourses of categoriesCourses" style="flex-wrap: nowrap">-->
-  <!--<course-thumbnail [course]="course" *ngFor="let course of categoryCourses.categoryCourses"></course-thumbnail>-->
-  <!--</ion-row>-->
-
-  <div *ngFor="let categoryCourses of categoriesCourses">
-    <ion-row class="category-Container" align-items-center>
-      <div class="category-title" col-3>
-        <div>
-          <i [ngClass]="categoryCourses.categoryIcon" aria-hidden="true"></i>
-          <h4>{{categoryCourses.categoryName}}</h4>
-          <button ion-button clear>View more</button>
-        </div>
-      </div>
-      <ion-scroll scrollX="true" col-9>
-        <ion-row class="thumbnail-container" nowrap align-items-center>
-          <course-thumbnail [course]="course"
-                            *ngFor="let course of categoryCourses.categoryCourses"></course-thumbnail>
-        </ion-row>
-      </ion-scroll>
-    </ion-row>
+<ion-content class="body">
+  <div style="height: 35px">
   </div>
+
+  <category [categoryCourses]="categoryCourses" *ngFor="let categoryCourses of categoriesCourses"></category>
 
 </ion-content>

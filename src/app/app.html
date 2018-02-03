@@ -33,7 +33,7 @@
         <!--<i class="fa fa-th-list" aria-hidden="true"></i>-->
         <!--Categories-->
         <!--</button>-->
-        <button class="primary-item" menuClose ion-item>
+        <button (click)="routeToTrainingCenter()" class="primary-item" menuClose ion-item>
           <i class="fa fa-graduation-cap" aria-hidden="true"></i>
           Training Centers
         </button>
@@ -44,8 +44,8 @@
       </ion-list>
       <div class="menu-divider"></div>
       <ion-list no-lines>
-        <!--<button menuClose class="secondry-item" ion-item (click)="promptChooseCountry()">Choose Country</button>-->
-        <!--<button menuClose class="secondry-item" ion-item (click)="promptChooseLanguage()">Choose Language</button>-->
+        <button menuClose class="secondry-item" ion-item (click)="promptChooseCountry()">Choose Country</button>
+        <button menuClose class="secondry-item" ion-item (click)="promptChooseLanguage()">Choose Language</button>
         <button menuClose class="secondry-item" ion-item>Settings</button>
         <button menuClose class="secondry-item" ion-item>Contact Us</button>
       </ion-list>

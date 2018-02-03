@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Ask {{trainingCenterDetails.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <!--<ion-label color="primary" floating>Question 1:</ion-label>-->
+  <!--<ion-textarea placeholder="Ask a a question"></ion-textarea>-->
+
+  <ion-list inset>
+    <ion-item-sliding *ngFor="let question of questions; let i=index">
+      <ion-item>
+        <ion-label color="dark" floating>Question {{i+1}} ...</ion-label>
+        <ion-textarea [(ngModel)]="question.question"></ion-textarea>
+      </ion-item>
+      <ion-item-options *ngIf="questions.length > 1">
+        <button ion-button (click)="removeQuestion(i)">
+          <ion-icon name="md-close"></ion-icon>
+          remove
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <!--<ion-item>-->
+    <button *ngIf="questions.length < 3" col-5 (click)="addQuestion()" ion-button clear>
+      <ion-icon name="add-circle" class="icon-in-button"></ion-icon>
+      Ask more
+    </button>
+
+    <p *ngIf="questions.length > 1">
+      <ion-icon name="information-circle" color="danger" class="icon-in-button"></ion-icon>
+      Swipe question left to <strong>remove</strong>.
+    </p>
+    <!--</ion-item>-->
+
+    <ion-item>
+    </ion-item>
+  </ion-list>
+
+  <button (click)="postQuestions()" ion-button>
+    <ion-icon name="send" class="icon-in-button"></ion-icon>
+    Send
+  </button>
+
+</ion-content>

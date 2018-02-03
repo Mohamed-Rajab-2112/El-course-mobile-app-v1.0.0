@@ -17,7 +17,10 @@ export class ApiUrlProvider {
       feedsCoursesUrl: this._baseUrl + 'interstsFeed.json',
       languageUrl: this._baseUrl + 'languages.json',
       countryUrl: this._baseUrl + 'countries.json',
-      categoryWithCoursesUrl: this._baseUrl + 'categoryWithCourses.json'
+      categoryWithCoursesUrl: this._baseUrl + 'categoryWithCourses.json',
+      trainingCenters: this._baseUrl + 'trainingCenter.json',
+      trainingCenterDetails: this._baseUrl + 'trainingCenterDetails.json',
+      postQuestions: this._baseUrl + 'postQuestionsURL'
     }
   }
 

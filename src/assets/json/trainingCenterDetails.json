@@ -1,0 +1,77 @@
+{
+  "id": 1,
+  "name": "training center 1",
+  "area": "Nasr city/Cairo",
+  "logo": "assets/images/training-center-temp.jpg",
+  "description": "We have a very good courses",
+  "courses": [
+    {
+      "categoryName": "Android Development",
+      "categoryIcon": "fa fa-android",
+      "categoryCourses": [
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        },
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        },
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        },
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        }
+      ]
+    },
+    {
+      "categoryName": "Android Development",
+      "categoryIcon": "fa fa-android",
+      "categoryCourses": [
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        },
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        },
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        },
+        {
+          "id": 1,
+          "name": "course 1",
+          "image": "assets/images/courses-img/course-img-template.jpg",
+          "fakePrice": 1450,
+          "price": 1500
+        }
+      ]
+    }
+  ]
+}
