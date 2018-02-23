@@ -17,7 +17,8 @@ export class TrainingCenterDetailsPage {
   trainingCenterDetails: any = {};
   getTrainingCenterByIdSubscribtion: Subscription;
   // userTypeSubscriptionthis: Subscription;
-  userType: string;
+  userData: any;
+  userTypeSubscription: Subscription;
   showAskQuestion: boolean;
   @ViewChild(Content) content: Content;
 
@@ -26,8 +27,13 @@ export class TrainingCenterDetailsPage {
 
   ionViewDidLoad() {
     this.getTrainingCenterDetails();
-    this.userType = this.auth.userType.value;
-    this.showAskQuestion = this.userType == 'guest' || this.userType == 'student';
+    this.userTypeSubscription = this.auth.userData.subscribe((userData) => {
+        this.userData = userData && userData.userType;
+        this.showAskQuestion = !userData || this.userData.userType != 'trainingCenter';
+      },
+      err => {
+        alert(err);
+      });
   }
 
   ionViewWillEnter() {
@@ -36,26 +42,30 @@ export class TrainingCenterDetailsPage {
 
   ionViewWillUnload() {
     this.getTrainingCenterByIdSubscribtion.unsubscribe();
+    this.userTypeSubscription.unsubscribe();
   }
 
   getTrainingCenterDetails() {
     this.trainingCenterDetails = {};
-    let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
-    loader.present().then(() => {
-      this.getTrainingCenterByIdSubscribtion = this.guestProvider.getTrainingCenterById(this.navParams.data).subscribe((trainingCenterDetails) => {
-          this.trainingCenterDetails = trainingCenterDetails;
-          loader.dismiss();
-        },
-        err => {
-          loader.dismiss();
-        });
-    });
+    // let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
+    // loader.present().then(() => {
+    this.utilities.showLoading()
+      .then(() => {
+        this.getTrainingCenterByIdSubscribtion = this.guestProvider.getTrainingCenterById(this.navParams.data).subscribe((trainingCenterDetails) => {
+            this.trainingCenterDetails = trainingCenterDetails;
+            this.utilities.hideLoading();
+          },
+          err => {
+            this.utilities.hideLoading();
+          });
+      })
+    // });
   }
 
   routeToQuestions($event) {
-    if (this.userType == 'student') {
+    if (this.userData) {
       this.navCtrl.push(QuestionsPage, this.trainingCenterDetails.id);
-    } else if (this.userType == 'guest') {
+    } else {
       this.utilities.showAlert("Can't Ask", "Please Sign in first to ask questions.", "prompt", 'Sign In', 'Cancel')
         .then(() => {
           this.navCtrl.push(SignInPage);

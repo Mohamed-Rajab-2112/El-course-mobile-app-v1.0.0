@@ -4,15 +4,16 @@ import 'rxjs/add/operator/map';
 import {BehaviorSubject} from "rxjs";
 import {InterestsPage} from "../../pages/interests/interests";
 import {animationFrame} from "rxjs/scheduler/animationFrame";
-import {AlertController} from "ionic-angular";
+import {AlertController, LoadingController} from "ionic-angular";
 
 
 @Injectable()
 export class UtilitiesProvider {
   homePage = new BehaviorSubject<any>(InterestsPage);
   loaderOptions: any = {};
+  loader: any;
 
-  constructor(public http: Http, private alertCtrl: AlertController) {
+  constructor(public http: Http, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     this.loaderOptions = {
       spinner: 'dots',
       content: "Please wait..."
@@ -23,7 +24,7 @@ export class UtilitiesProvider {
     this.homePage.next(value)
   }
 
-  showAlert(title, body, type, acceptBtnTxt?, cancelBtnTxt?) {
+  showAlert(title, body, type = 'alert', acceptBtnTxt = 'Ok', cancelBtnTxt = 'Cancel') {
     // let alert;
 
     return new Promise((resolve, reject) => {
@@ -37,7 +38,7 @@ export class UtilitiesProvider {
               text: 'Ok',
               role: 'cancel',
               handler: () => {
-                console.log('Cancel clicked');
+                reject();
               }
             }
           ],
@@ -53,23 +54,28 @@ export class UtilitiesProvider {
               role: 'cancel',
               handler: () => {
                 reject();
-                return true;
               }
             },
             {
               text: acceptBtnTxt,
               handler: () => {
                 resolve();
-                return true;
               }
             }
           ],
           enableBackdropDismiss: false
         });
       }
-      console.log(alert);
       alert.present();
     })
   }
 
+  showLoading() {
+    this.loader = this.loadingCtrl.create(this.loaderOptions);
+    return this.loader.present()
+  }
+
+  hideLoading() {
+    return this.loader.dismiss();
+  }
 }

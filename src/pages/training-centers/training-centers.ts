@@ -30,15 +30,15 @@ export class TrainingCentersPage {
   }
 
   getAllCenters() {
-    let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
-    loader.present().then(() => {
+    // let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
+    this.utilities.showLoading().then(() => {
       this.getAllCentersSubscription = this.guestProvider.getTrainingCenters().subscribe((trainingCenters) => {
           this.trainingCenters = trainingCenters;
-          loader.dismiss()
+          this.utilities.hideLoading();
         },
         err => {
           console.log(err);
-          loader.dismiss()
+          this.utilities.hideLoading()
         })
     })
   }

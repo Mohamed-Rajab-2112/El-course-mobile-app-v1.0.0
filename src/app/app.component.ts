@@ -20,6 +20,7 @@ import {Content} from 'ionic-angular';
 import {UtilitiesProvider} from "../providers/utilities/utilities";
 import {CategoriesPage} from "../pages/categories/categories";
 import {TrainingCentersPage} from "../pages/training-centers/training-centers";
+import {SignInPage} from "../pages/sign-in/sign-in";
 
 @Component({
   templateUrl: 'app.html',
@@ -31,6 +32,7 @@ export class XsourceApp {
   countries: any[];
   @ViewChild(Nav) nav: Nav;
   @ViewChild(Content) content: Content;
+  userData: any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private database: DatabaseProvider, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private keyboard: Keyboard) {
     platform.ready().then(() => {
@@ -57,11 +59,35 @@ export class XsourceApp {
       //     this.storage.setItem('first run', false)
       //   });
 
-      this.auth.userType.subscribe((userType) => {
-          this.userType = userType;
+      // this.auth.userType.subscribe((userType) => {
+      //     this.userType = userType;
+      //     console.log(this.userData);
+      //   },
+      //   err => {
+      //     this.userType = 'guest';
+      //   });
+
+      this.auth.userData.subscribe((currentUserData) => {
+          if (currentUserData) {
+            this.userData = currentUserData;
+            // this.auth.setUserType('student');
+          } else {
+            this.storage.getItem('userData')
+              .then((userData) => {
+                alert(userData);
+                this.userData = userData;
+                // this.auth.setUserType('student');
+              })
+              .catch((err) => {
+                this.userData = currentUserData;
+                alert('signed out')
+                // this.auth.setUserType('guest');
+              })
+          }
+          console.log(this.userData);
         },
         err => {
-          this.userType = 'guest';
+          alert(err);
         });
 
       // Okay, so the platform is ready and our plugins are available.
@@ -71,6 +97,7 @@ export class XsourceApp {
       splashScreen.hide();
       // this.rootPage = LocationPage;
     });
+
 
     /*Get languages*/
     /*-------------*/
@@ -99,13 +126,19 @@ export class XsourceApp {
     })
   }
 
+  signOut() {
+    this.auth.signOut()
+      .then(() => {
+        this.nav.popToRoot();
+      });
+  }
+
   /*routing functions*/
 
   /*=================*/
 
-  scrollToTop() {
-
-    this.content.scrollToTop();
+  routeToSignIn() {
+    this.nav.push(SignInPage);
   }
 
   routeToHome() {

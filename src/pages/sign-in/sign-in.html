@@ -19,4 +19,44 @@
 
 <ion-content padding>
 
+  <form class="sign-in-form">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>User Name/Email</ion-label>
+        <ion-input required type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input required type="password"></ion-input>
+      </ion-item>
+
+      <div></div>
+    </ion-list>
+
+    <ion-row>
+      <button col-12 ion-button type="submit" color="dark">Sign In</button>
+    </ion-row>
+  </form>
+
+  <ion-row>
+    <ion-col col-6>
+      <button col-12 ion-button clear>Forget Password</button>
+    </ion-col>
+    <ion-col col-6>
+      <button col-12 ion-button clear>Sign Up</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="google-facebook-sign-in">
+    <button col-12 ion-button color="danger" (click)="signInWithGoogle()">
+      <ion-icon name="logo-google" class="icon-in-button"></ion-icon>
+      Sign In By Google
+    </button>
+    <button col-12 ion-button (click)="signInWithFacebook()">
+      <ion-icon name="logo-facebook" class="icon-in-button"></ion-icon>
+      Sign In By Facebook
+    </button>
+  </ion-row>
+
 </ion-content>

@@ -21,14 +21,14 @@
     </ion-row>
     <ion-row justify-content-center>
       <ion-col col-7 *ngIf="showAskQuestion">
-        <button col-12 ion-button (click)="routeToQuestions($event)">Have a question<i class="fa fa-question"
-                                                                                       aria-hidden="true"></i></button>
+        <button col-12 ion-button (click)="routeToQuestions($event)" color="dark">Have a question<i
+          class="fa fa-question"
+          aria-hidden="true"></i></button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <div class="page-body">
-
     <category [categoryCourses]="categoryCourses"
               *ngFor="let categoryCourses of trainingCenterDetails?.courses"></category>
   </div>

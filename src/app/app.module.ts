@@ -21,6 +21,7 @@ import {DatabaseProvider} from '../providers/database/database';
 import {IonicStorageModule} from '@ionic/storage';
 import {Geolocation} from '@ionic-native/geolocation';
 import {Keyboard} from '@ionic-native/keyboard';
+import {GooglePlus} from '@ionic-native/google-plus';
 
 /*pipes*/
 import {PipesModule} from '../pipes/pipes.module';
@@ -41,6 +42,19 @@ import {ComponentsModule} from "../components/components.module";
 import {QuestionsPageModule} from "../pages/questions/questions.module";
 // import {SignInPage} from "../pages/sign-in/sign-in";
 import {SignInPageModule} from "../pages/sign-in/sign-in.module";
+import {Facebook} from '@ionic-native/facebook'
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDYrrCt5GObIKP_IZ3rQSrDtfjoEtx9mrc",
+  authDomain: "xsource-a0e3f.firebaseapp.com",
+  databaseURL: "https://xsource-a0e3f.firebaseio.com",
+  projectId: "xsource-a0e3f",
+  storageBucket: "xsource-a0e3f.appspot.com",
+  messagingSenderId: "60593959366"
+};
 
 @NgModule({
   declarations: [
@@ -66,6 +80,9 @@ import {SignInPageModule} from "../pages/sign-in/sign-in.module";
     TrainingCenterDetailsPageModule,
     QuestionsPageModule,
     SignInPageModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
@@ -79,8 +96,11 @@ import {SignInPageModule} from "../pages/sign-in/sign-in.module";
     // CategoriesPage
   ],
   providers: [
+    Facebook,
+    GooglePlus,
     StatusBar,
     SplashScreen,
+    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoryProvider,
     SQLite,

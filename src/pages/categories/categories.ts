@@ -4,9 +4,10 @@ import {GuestProvider} from "../../providers/guest/guest";
 import {Subscription} from "rxjs";
 import {MenuController} from 'ionic-angular';
 import {UtilitiesProvider} from "../../providers/utilities/utilities";
-import {Keyboard} from "@ionic-native/keyboard";
 
-// @IonicPage()
+// import {Keyboard} from "@ionic-native/keyboard";
+
+@IonicPage()
 @Component({
   selector: 'page-categories',
   templateUrl: 'categories.html',
@@ -17,11 +18,13 @@ export class CategoriesPage {
   categoriesCourses: any[];
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, private menuCtrl: MenuController, private loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private keyboard: Keyboard) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, private menuCtrl: MenuController, private loadingCtrl: LoadingController, private utilities: UtilitiesProvider) {
   }
 
   ionViewDidLoad() {
-    this.getCategoriesCourses();
+    this.utilities.showLoading().then(() => {
+      this.getCategoriesCourses();
+    })
   }
 
   ionViewWillUnload() {
@@ -33,17 +36,17 @@ export class CategoriesPage {
   }
 
   getCategoriesCourses() {
-    let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
-    loader.present().then(() => {
-      this.categoriesCoursesSubscription = this.guestProvider.getCategoryWithCourses().subscribe((categoriesCourses) => {
-          this.categoriesCourses = categoriesCourses;
-          loader.dismiss();
-        },
-        err => {
-          console.log(err);
-          loader.dismiss();
-        })
-    })
+    // let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
+    // this.utilities.showLoading().then(() => {
+    this.categoriesCoursesSubscription = this.guestProvider.getCategoryWithCourses().subscribe((categoriesCourses) => {
+        this.categoriesCourses = categoriesCourses;
+        this.utilities.hideLoading();
+      },
+      err => {
+        console.log(err);
+        this.utilities.hideLoading();
+      })
+    // })
   }
 
   openMenu() {

@@ -5,6 +5,7 @@ import {GuestProvider} from "../../providers/guest/guest";
 import {UtilitiesProvider} from "../../providers/utilities/utilities";
 import {StudentProvider} from "../../providers/student/student";
 import {Keyboard} from "@ionic-native/keyboard";
+import {TrainingCenterDetailsPage} from "../training-center-details/training-center-details";
 
 @IonicPage()
 @Component({
@@ -52,12 +53,22 @@ export class QuestionsPage {
       return question.question && question.question.length
     });
     console.log(questionsToPost);
-    questionsToPost.length && this.studentProvider.postQuestions(questionsToPost).subscribe(() => {
-        this.utilities.showAlert('Success', 'Questions Send successfully', 'prompt')
-      },
-      err => {
-        this.utilities.showAlert('Failed', 'Failed to send questions.', 'alert')
-      });
+    if (questionsToPost.length) {
+      this.utilities.showAlert('Confirm', 'Please, Confirm sending this Questions', 'prompt', 'Yes!', 'Cancel').then(() => {
+        this.studentProvider.postQuestions(questionsToPost).subscribe(() => {
+            this.navCtrl.pop(TrainingCenterDetailsPage);
+          },
+          err => {
+            this.utilities.showAlert('Failed', 'Failed to send questions.', 'alert')
+              .catch(()=> {
+                console.log('cancelled')
+              })
+          });
+      })
+        .catch(() => {
+          console.log('cancelled');
+        });
+    }
   }
 
   getTrainingCenterDetails() {
