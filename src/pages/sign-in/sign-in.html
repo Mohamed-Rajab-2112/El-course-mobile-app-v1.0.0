@@ -19,16 +19,16 @@
 
 <ion-content padding>
 
-  <form class="sign-in-form">
+  <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && signIn()" class="sign-in-form">
     <ion-list>
       <ion-item>
         <ion-label floating>User Name/Email</ion-label>
-        <ion-input required type="text"></ion-input>
+        <ion-input required name="email" [(ngModel)]="signInData.email" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input required type="password"></ion-input>
+        <ion-input required name="password" [(ngModel)]="signInData.password" type="password"></ion-input>
       </ion-item>
 
       <div></div>
@@ -44,7 +44,7 @@
       <button col-12 ion-button clear>Forget Password</button>
     </ion-col>
     <ion-col col-6>
-      <button col-12 ion-button clear>Sign Up</button>
+      <button col-12 ion-button clear (click)="routrToSignUp()">Sign Up</button>
     </ion-col>
   </ion-row>
 

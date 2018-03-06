@@ -21,30 +21,31 @@ export class TrainingCenterDetailsPage {
   userTypeSubscription: Subscription;
   showAskQuestion: boolean;
   @ViewChild(Content) content: Content;
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, public loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private auth: AuthProvider) {
   }
-
+  
   ionViewDidLoad() {
     this.getTrainingCenterDetails();
     this.userTypeSubscription = this.auth.userData.subscribe((userData) => {
         this.userData = userData && userData.userType;
+        console.log(userData);
         this.showAskQuestion = !userData || this.userData.userType != 'trainingCenter';
       },
       err => {
         alert(err);
       });
   }
-
+  
   ionViewWillEnter() {
     this.content.resize();
   }
-
+  
   ionViewWillUnload() {
     this.getTrainingCenterByIdSubscribtion.unsubscribe();
     this.userTypeSubscription.unsubscribe();
   }
-
+  
   getTrainingCenterDetails() {
     this.trainingCenterDetails = {};
     // let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
@@ -61,7 +62,7 @@ export class TrainingCenterDetailsPage {
       })
     // });
   }
-
+  
   routeToQuestions($event) {
     if (this.userData) {
       this.navCtrl.push(QuestionsPage, this.trainingCenterDetails.id);
@@ -75,5 +76,5 @@ export class TrainingCenterDetailsPage {
         });
     }
   }
-
+  
 }

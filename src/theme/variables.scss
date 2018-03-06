@@ -38,6 +38,10 @@ $colors: (
   dark: $primaryColor
 );
 
+$text-input-highlight-color-valid: $primaryColor;
+$text-input-highlight-color: $primaryColor;
+$text-input-highlight-color-invalid: red;
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

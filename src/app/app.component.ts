@@ -33,18 +33,18 @@ export class XsourceApp {
   @ViewChild(Nav) nav: Nav;
   @ViewChild(Content) content: Content;
   userData: any;
-
+  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private database: DatabaseProvider, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private keyboard: Keyboard) {
     platform.ready().then(() => {
-
+      
       this.rootPage = CategoriesPage;
-
+      
       /*subscribe to the root page to make it dynamic*/
       /*---------------------------------------------*/
       // this.utilitiesProvider.homePage.subscribe((homePageValue) => {
       //   this.rootPage = homePageValue;
       // });
-
+      
       /*Register user first run flag*/
       /*----------------------------*/
       // this.storage.getItem('first run')
@@ -58,7 +58,7 @@ export class XsourceApp {
       //     this.utilitiesProvider.setHomePage(InterestsPage);
       //     this.storage.setItem('first run', false)
       //   });
-
+      
       // this.auth.userType.subscribe((userType) => {
       //     this.userType = userType;
       //     console.log(this.userData);
@@ -66,22 +66,19 @@ export class XsourceApp {
       //   err => {
       //     this.userType = 'guest';
       //   });
-
+      
       this.auth.userData.subscribe((currentUserData) => {
           if (currentUserData) {
             this.userData = currentUserData;
-            // this.auth.setUserType('student');
           } else {
             this.storage.getItem('userData')
               .then((userData) => {
-                alert(userData);
+                // alert(userData);
                 this.userData = userData;
-                // this.auth.setUserType('student');
               })
               .catch((err) => {
                 this.userData = currentUserData;
-                alert('signed out')
-                // this.auth.setUserType('guest');
+                // alert('signed out')
               })
           }
           console.log(this.userData);
@@ -89,7 +86,7 @@ export class XsourceApp {
         err => {
           alert(err);
         });
-
+      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.database.initDb();
@@ -97,8 +94,8 @@ export class XsourceApp {
       splashScreen.hide();
       // this.rootPage = LocationPage;
     });
-
-
+    
+    
     /*Get languages*/
     /*-------------*/
     this.guestProvider.getLanguage().subscribe((languages) => {
@@ -111,7 +108,7 @@ export class XsourceApp {
         });
       })
     });
-
+    
     /*Get countries*/
     /*-------------*/
     this.guestProvider.getCountries().subscribe((countries) => {
@@ -125,39 +122,39 @@ export class XsourceApp {
       })
     })
   }
-
+  
   signOut() {
     this.auth.signOut()
       .then(() => {
         this.nav.popToRoot();
       });
   }
-
+  
   /*routing functions*/
-
+  
   /*=================*/
-
+  
   routeToSignIn() {
     this.nav.push(SignInPage);
   }
-
+  
   routeToHome() {
     this.nav.popToRoot(HomePage);
   }
-
+  
   routeToTrainingCenter() {
     this.nav.push(TrainingCentersPage);
   }
-
+  
   // routeToCategories() {
   //   // console.log('route to categories');
   //   this.nav.push(CategoriesPage);
   // }
-
+  
   /*prompt for choosing country*/
-
+  
   /*===========================*/
-
+  
   promptChooseCountry() {
     console.log('country prompt');
     this.storage.getItem('countryId')
@@ -190,11 +187,11 @@ export class XsourceApp {
       alert.present();
     });
   }
-
+  
   /*prompt for choosing language*/
-
+  
   /*============================*/
-
+  
   promptChooseLanguage() {
     console.log('language prompt');
     this.storage.getItem('languageId')
@@ -228,6 +225,6 @@ export class XsourceApp {
       });
       alert.present();
     });
-
+    
   }
 }

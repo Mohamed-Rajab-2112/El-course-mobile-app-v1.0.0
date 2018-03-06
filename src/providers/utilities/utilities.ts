@@ -12,21 +12,21 @@ export class UtilitiesProvider {
   homePage = new BehaviorSubject<any>(InterestsPage);
   loaderOptions: any = {};
   loader: any;
-
+  
   constructor(public http: Http, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     this.loaderOptions = {
       spinner: 'dots',
       content: "Please wait..."
     }
   }
-
+  
   setHomePage(value) {
     this.homePage.next(value)
   }
-
+  
   showAlert(title, body, type = 'alert', acceptBtnTxt = 'Ok', cancelBtnTxt = 'Cancel') {
     // let alert;
-
+    
     return new Promise((resolve, reject) => {
       let alert;
       if (type == 'alert') {
@@ -38,7 +38,7 @@ export class UtilitiesProvider {
               text: 'Ok',
               role: 'cancel',
               handler: () => {
-                reject();
+                resolve();
               }
             }
           ],
@@ -69,12 +69,12 @@ export class UtilitiesProvider {
       alert.present();
     })
   }
-
+  
   showLoading() {
     this.loader = this.loadingCtrl.create(this.loaderOptions);
     return this.loader.present()
   }
-
+  
   hideLoading() {
     return this.loader.dismiss();
   }
