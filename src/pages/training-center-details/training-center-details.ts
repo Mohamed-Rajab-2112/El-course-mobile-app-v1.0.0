@@ -65,11 +65,11 @@ export class TrainingCenterDetailsPage {
   
   routeToQuestions($event) {
     if (this.userData) {
-      this.navCtrl.push(QuestionsPage, this.trainingCenterDetails.id);
+      this.navCtrl.push('QuestionsPage', this.trainingCenterDetails.id);
     } else {
       this.utilities.showAlert("Can't Ask", "Please Sign in first to ask questions.", "prompt", 'Sign In', 'Cancel')
         .then(() => {
-          this.navCtrl.push(SignInPage);
+          this.navCtrl.push('SignInPage');
         })
         .catch(() => {
           console.log('rejected');

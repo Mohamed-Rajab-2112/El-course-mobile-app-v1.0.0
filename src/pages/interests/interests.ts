@@ -56,7 +56,7 @@ export class InterestsPage {
   }
 
   routeToLocation() {
-    this.navCtrl.push(LocationPage);
+    this.navCtrl.push('LocationPage');
   }
 
   /*add categories that user choose to a list without duplicate*/

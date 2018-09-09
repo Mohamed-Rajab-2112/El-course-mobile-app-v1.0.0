@@ -6,36 +6,44 @@
 -->
 <ion-header>
 
-  <ion-navbar color="dark">
-    <ion-title>sign up</ion-title>
-  </ion-navbar>
+    <ion-navbar color="dark">
+        <ion-title>sign up</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-  <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && signUp()">
-    <ion-list>
-      <ion-item>
-        <ion-label floating>Name</ion-label>
-        <ion-input name="name" color="dark" [(ngModel)]="signUpDate.name" required type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Phone</ion-label>
-        <ion-input name="phone" [(ngModel)]="signUpDate.phone" required type="phone"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input name="email" [(ngModel)]="signUpDate.email" required type="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input name="password" [(ngModel)]="signUpDate.password" required type="password"></ion-input>
-      </ion-item>
+    <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && signUp()">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Name</ion-label>
+                <ion-input name="name" color="dark" [(ngModel)]="signUpDate.name" required type="text"></ion-input>
+            </ion-item>
+            <xsource-error *ngIf="signUpForm.submitted && signUpForm?.controls?.name?.invalid"></xsource-error>
 
-      <button ion-button col-12 type="submit" class="signUp-btn" color="dark">Sign up</button>
+            <ion-item>
+                <ion-label floating>Phone</ion-label>
+                <ion-input [pattern]="phoneRegex" name="phone" [(ngModel)]="signUpDate.phone" required
+                           type="phone"></ion-input>
+            </ion-item>
+            <xsource-error *ngIf="signUpForm.submitted && signUpForm?.controls?.phone?.invalid"
+                           [body]="'Phone number is required and must be numbers only'"></xsource-error>
 
-      <div></div>
-    </ion-list>
-  </form>
+            <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input name="email" [(ngModel)]="signUpDate.email" required type="email"></ion-input>
+            </ion-item>
+            <xsource-error *ngIf="signUpForm.submitted && signUpForm?.controls?.email?.invalid"></xsource-error>
+
+            <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input name="password" [(ngModel)]="signUpDate.password" required type="password"></ion-input>
+            </ion-item>
+            <xsource-error *ngIf="signUpForm.submitted && signUpForm?.controls?.password?.invalid"></xsource-error>
+
+            <button ion-button col-12 type="submit" class="signUp-btn" color="dark">Sign up</button>
+
+            <div></div>
+        </ion-list>
+    </form>
 </ion-content>

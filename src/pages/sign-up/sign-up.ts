@@ -10,14 +10,15 @@ import {UtilitiesProvider} from "../../providers/utilities/utilities";
 })
 export class SignUpPage {
   signUpDate: any = {};
-  
+  phoneRegex = this.utilities.phoneRegex;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private utilities: UtilitiesProvider) {
   }
-  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpPage');
   }
-  
+
   signUp() {
     console.log(this.signUpDate);
     this.utilities.showLoading()
@@ -25,18 +26,14 @@ export class SignUpPage {
         this.auth.signUp(this.signUpDate)
           .then(() => {
             this.utilities.hideLoading()
-              .then(() => {
-                this.navCtrl.popToRoot();
-              })
+            this.navCtrl.popToRoot();
           })
-          .catch(() => {
-            this.utilities.hideLoading()
-              .then(() => {
-                this.utilities.showAlert('Failed', 'Failed to sign up due to err, please try again later.')
-              })
+          .catch((err) => {
+            this.utilities.hideLoading();
+            this.utilities.showAlert('Failed', err.message)
           })
       })
-    
+
   }
-  
+
 }

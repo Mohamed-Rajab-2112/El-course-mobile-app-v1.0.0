@@ -4,6 +4,7 @@ import {GuestProvider} from "../../providers/guest/guest";
 import {Subscription} from "rxjs";
 import {MenuController} from 'ionic-angular';
 import {UtilitiesProvider} from "../../providers/utilities/utilities";
+import {CategoryDetailsPage} from "../category-details/category-details";
 
 // import {Keyboard} from "@ionic-native/keyboard";
 
@@ -36,8 +37,6 @@ export class CategoriesPage {
   }
 
   getCategoriesCourses() {
-    // let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
-    // this.utilities.showLoading().then(() => {
     this.categoriesCoursesSubscription = this.guestProvider.getCategoryWithCourses().subscribe((categoriesCourses) => {
         this.categoriesCourses = categoriesCourses;
         this.utilities.hideLoading();
@@ -46,11 +45,13 @@ export class CategoriesPage {
         console.log(err);
         this.utilities.hideLoading();
       })
-    // })
+  }
+
+  routeToCategoryDetails() {
+    this.navCtrl.push('CategoryDetailsPage');
   }
 
   openMenu() {
-    // console.log('open menu')
     this.menuCtrl.toggle();
   }
 }

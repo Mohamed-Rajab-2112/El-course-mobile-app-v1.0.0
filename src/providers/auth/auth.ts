@@ -15,13 +15,13 @@ import {GooglePlus} from '@ionic-native/google-plus';
 export class AuthProvider {
   // userType = new BehaviorSubject<string>('guest');
   userData = new BehaviorSubject<any>(null);
-  
+
   // databaseUserData: any;
-  
+
   constructor(public http: Http, private angularFireAuth: AngularFireAuth, private angularFireStore: AngularFirestore, public facebook: Facebook, private platform: Platform, private storage: NativeStorage, private utilities: UtilitiesProvider, private googlePlus: GooglePlus) {
-  
+
   }
-  
+
   signUp(signUpDate) {
     console.log(signUpDate.email, signUpDate.password);
     return new Promise((resolve, reject) => {
@@ -33,7 +33,6 @@ export class AuthProvider {
             uid: userData.uid,
             name: signUpDate.name,
             email: userData.email,
-            photo: 'assets/images/default-user-avatar.png',
             userType: 'student',
             authType: 'default'
           };
@@ -41,8 +40,10 @@ export class AuthProvider {
             .then((userData) => {
               this.storeUserInDatabase(userData);
             });
-          this.signIn(signUpDate);
-          resolve();
+          this.signIn(signUpDate)
+            .then(() => {
+              resolve();
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -50,34 +51,36 @@ export class AuthProvider {
         })
     })
   }
-  
+
   signIn(signInData) {
-    console.log(signInData);
-    this.angularFireAuth.auth.signInWithEmailAndPassword(signInData.email, signInData.password)
-      .then((userData) => {
-        console.log(userData);
-        let test = this.angularFireStore.collection('users', (ref) => ref.where('uid', '==', userData.uid));
-        test.valueChanges().subscribe((value) => {
-          console.log(value);
+    return new Promise((resolve, reject) => {
+      this.angularFireAuth.auth.signInWithEmailAndPassword(signInData.email, signInData.password)
+        .then((userData) => {
+          console.log(userData);
+          let selectUserByUID = this.angularFireStore.collection('users', (ref) => ref.where('uid', '==', userData.uid));
+          selectUserByUID.valueChanges().subscribe((selectedUsers) => {
+            const selectedUser: any = selectedUsers[0];
+            let data = {
+              uid: selectedUser.uid,
+              name: selectedUser.name,
+              email: selectedUser.email,
+              photo: selectedUser.photo ? selectedUser.photo : 'assets/images/default-user-avatar.png',
+              userType: selectedUser.userType,
+              authType: selectedUser.authType
+            };
+            this.registerUserData(data, selectedUser.authType)
+              .then((userData) => {
+                this.setUserData(userData);
+              });
+            resolve();
+          });
         })
-        let data = {
-          uid: userData.uid,
-          name: signInData.name,
-          email: userData.email,
-          photo: 'assets/images/default-user-avatar.png',
-          userType: 'student',
-          authType: 'default'
-        };
-        this.registerUserData(data, 'default')
-          .then((userData) => {
-            this.setUserData(userData);
-          })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        .catch((err) => {
+          reject(err);
+        })
+    });
   }
-  
+
   setUserData(value) {
     if (!value) {
       alert('will remove user data');
@@ -93,7 +96,7 @@ export class AuthProvider {
         })
     }
   }
-  
+
   signInWithFacebook() {
     return new Promise((resolve, reject) => {
       // console.log('will check platform');
@@ -168,7 +171,7 @@ export class AuthProvider {
         })
     })
   }
-  
+
   signInWithGoogle() {
     return new Promise((resolve, reject) => {
       this.utilities.showLoading()
@@ -216,76 +219,59 @@ export class AuthProvider {
         });
     })
   }
-  
+
   signOut() {
     return new Promise((resolve, reject) => {
-      this.utilities.showLoading()
+      this.angularFireAuth.auth.signOut()
         .then(() => {
-          this.angularFireAuth.auth.signOut()
-            .then(() => {
-              this.storage.getItem('userData')
-                .then((userData) => {
-                  if (userData.authType == 'google') {
-                    this.googlePlus.login({
-                        'webClientId': '60593959366-ka4glm7lk739i7hrp4cdulcdh5g91tjm.apps.googleusercontent.com'
-                      }
-                    )
+          this.storage.getItem('userData')
+            .then((userData) => {
+              if (userData.authType == 'google') {
+                this.googlePlus.login({
+                    'webClientId': '60593959366-ka4glm7lk739i7hrp4cdulcdh5g91tjm.apps.googleusercontent.com'
+                  }
+                )
+                  .then(() => {
+                    this.googlePlus.logout()
                       .then(() => {
-                        this.googlePlus.logout()
-                          .then(() => {
-                            // alert('logging out');
-                            this.setUserData(null);
-                            this.utilities.hideLoading()
-                              .then(() => {
-                                resolve();
-                              })
-                          })
-                          .catch((err) => {
-                            // alert(JSON.stringify(err, null, 3));
-                            this.utilities.hideLoading()
-                              .then(() => {
-                                this.utilities.showAlert('Failed', 'Failed Due to network error')
-                              })
-                          })
+                        // alert('logging out');
+                        this.setUserData(null);
+                        resolve();
                       })
                       .catch((err) => {
-                        alert(JSON.stringify(err, null, 3));
-                        this.utilities.hideLoading()
-                          .then(() => {
-                            resolve();
-                          })
+                        reject();
                       })
-                  } else if (userData.authType == 'facebook') {
-                    this.facebook.logout()
-                      .then(() => {
-                        this.setUserData(null);
-                        this.utilities.hideLoading()
-                          .then(() => {
-                            resolve();
-                          })
-                      })
-                      .catch(() => {
-                        this.utilities.hideLoading()
-                          .then(() => {
-                            this.utilities.showAlert('Failed', 'Failed Due to network error')
-                          })
-                      })
-                  }
-                })
-                .catch((err) => {
-                  alert(err);
-                })
+                  })
+                  .catch((err) => {
+                    alert(JSON.stringify(err, null, 3));
+                    resolve();
+                  })
+              }
+              else if (userData.authType == 'facebook') {
+                this.facebook.logout()
+                  .then(() => {
+                    this.setUserData(null);
+                    resolve();
+                  })
+                  .catch(() => {
+                    reject();
+                  })
+              }
+              else if (userData.authType == 'default') {
+                this.setUserData(null);
+                resolve();
+              }
             })
-            .catch(() => {
-              this.utilities.hideLoading()
-                .then(() => {
-                  this.utilities.showAlert('Failed', 'Failed Due to network error')
-                })
+            .catch((err) => {
+              reject();
             })
+        })
+        .catch(() => {
+          reject();
         })
     })
   }
-  
+
   registerUserData(userData, authType, platform = 'mobile') {
     let data: any;
     return new Promise((resolve, reject) => {
@@ -318,7 +304,7 @@ export class AuthProvider {
     /*will un-comment when innstall android sdk on mobile*/
     // this.setUserData(data);
   }
-  
+
   storeUserInDatabase(data) {
     this.angularFireStore.collection('users').doc(data.uid).set(data)
       .then(() => {

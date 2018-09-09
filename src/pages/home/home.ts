@@ -60,7 +60,7 @@ export class HomePage implements OnDestroy {
   }
 
   routeToDetails() {
-    this.navCtrl.push(InterestsPage);
+    this.navCtrl.push('interestsPage');
   }
 
 

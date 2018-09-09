@@ -4,7 +4,6 @@ import {GuestProvider} from "../../providers/guest/guest";
 import {TrainingCenterDetailsPage} from "../training-center-details/training-center-details";
 import {Subscription} from "rxjs/Subscription";
 import {UtilitiesProvider} from "../../providers/utilities/utilities";
-import {Keyboard} from "@ionic-native/keyboard";
 
 @IonicPage()
 @Component({
@@ -17,7 +16,7 @@ export class TrainingCentersPage {
   getAllCentersSubscription: Subscription;
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private guestProvider: GuestProvider, private loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private keyboard: Keyboard) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private guestProvider: GuestProvider, private loadingCtrl: LoadingController, private utilities: UtilitiesProvider) {
   }
 
   ionViewDidLoad() {
@@ -48,7 +47,7 @@ export class TrainingCentersPage {
   }
 
   routeToTrainingCenterDetails($event, id) {
-    this.navCtrl.push(TrainingCenterDetailsPage, id)
+    this.navCtrl.push('TrainingCenterDetailsPage', id)
   }
 
   openMenu() {

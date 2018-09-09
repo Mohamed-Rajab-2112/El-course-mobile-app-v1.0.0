@@ -12,25 +12,24 @@ export class UtilitiesProvider {
   homePage = new BehaviorSubject<any>(InterestsPage);
   loaderOptions: any = {};
   loader: any;
-  
+  phoneRegex = /^\d+$/;
+
+
   constructor(public http: Http, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     this.loaderOptions = {
       spinner: 'dots',
       content: "Please wait..."
     }
   }
-  
+
   setHomePage(value) {
     this.homePage.next(value)
   }
-  
+
   showAlert(title, body, type = 'alert', acceptBtnTxt = 'Ok', cancelBtnTxt = 'Cancel') {
-    // let alert;
-    
     return new Promise((resolve, reject) => {
-      let alert;
       if (type == 'alert') {
-        alert = this.alertCtrl.create({
+        let alert = this.alertCtrl.create({
           title: title,
           message: body,
           buttons: [
@@ -44,8 +43,9 @@ export class UtilitiesProvider {
           ],
           enableBackdropDismiss: false
         });
+        alert.present();
       } else if (type == 'prompt') {
-        alert = this.alertCtrl.create({
+        let prompt = this.alertCtrl.create({
           title: title,
           message: body,
           buttons: [
@@ -65,16 +65,16 @@ export class UtilitiesProvider {
           ],
           enableBackdropDismiss: false
         });
+        prompt.present();
       }
-      alert.present();
     })
   }
-  
+
   showLoading() {
     this.loader = this.loadingCtrl.create(this.loaderOptions);
     return this.loader.present()
   }
-  
+
   hideLoading() {
     return this.loader.dismiss();
   }

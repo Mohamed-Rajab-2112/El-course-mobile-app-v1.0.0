@@ -5,12 +5,17 @@ import {ComponentsModule} from "../../components/components.module";
 import {Ionic2RatingModule} from 'ionic2-rating';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CategoriesPage
+  ],
   imports: [
     ComponentsModule,
     Ionic2RatingModule,
     IonicPageModule.forChild(CategoriesPage),
   ],
+  exports: [
+    CategoriesPage
+  ]
 })
 export class CategoriesPageModule {
 }

@@ -62,8 +62,8 @@ export const firebaseConfig = {
   declarations: [
     XsourceApp,
     // HomePage,
-    SearchResultPage,
-    CategoriesPage
+    // SearchResultPage,
+    // CategoriesPage
   ],
   imports: [
     BrowserModule,
@@ -73,16 +73,16 @@ export const firebaseConfig = {
       // pageTransition: 'ios-transition'
     }),
     HttpModule,
-    InterestsPageModule,
+    // InterestsPageModule,
     PipesModule,
-    LocationPageModule,
-    SignUpPageModule,
-    ManuallyLocationPageModule,
-    TrainingCentersPageModule,
-    ComponentsModule,
-    TrainingCenterDetailsPageModule,
-    QuestionsPageModule,
-    SignInPageModule,
+    // LocationPageModule,
+    // SignUpPageModule,
+    // ManuallyLocationPageModule,
+    // TrainingCentersPageModule,
+    // ComponentsModule,
+    // TrainingCenterDetailsPageModule,
+    // QuestionsPageModule,
+    // SignInPageModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -93,10 +93,10 @@ export const firebaseConfig = {
   entryComponents: [
     XsourceApp,
     // HomePage,
-    CategoriesPage,
-    InterestsPage,
-    LocationPage,
-    ManuallyLocationPage,
+    // CategoriesPage,
+    // InterestsPage,
+    // LocationPage,
+    // ManuallyLocationPage,
     // CategoriesPage
   ],
   providers: [

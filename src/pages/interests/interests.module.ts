@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {IonicPageModule} from 'ionic-angular';
 import {InterestsPage} from './interests';
 import {HttpModule} from '@angular/http';
-import { PipesModule } from '../../pipes/pipes.module';
+import {PipesModule} from '../../pipes/pipes.module';
 
 
 @NgModule({
@@ -13,6 +13,9 @@ import { PipesModule } from '../../pipes/pipes.module';
     IonicPageModule.forChild(InterestsPage),
     HttpModule,
     PipesModule
+  ],
+  exports: [
+    InterestsPage
   ]
 })
 export class InterestsPageModule {

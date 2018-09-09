@@ -21,7 +21,7 @@ export class LocationPage {
   }
 
   routeToHome() {
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push('HomePage');
   }
 
   activateGPS() {
@@ -37,6 +37,6 @@ export class LocationPage {
   }
 
   routeToManuallyLocation() {
-    this.navCtrl.push(ManuallyLocationPage);
+    this.navCtrl.push('ManuallyLocationPage');
   }
 }

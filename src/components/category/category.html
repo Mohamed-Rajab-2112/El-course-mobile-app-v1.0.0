@@ -4,7 +4,7 @@
       <div>
         <i [ngClass]="categoryCourses?.categoryIcon" aria-hidden="true"></i>
         <h4>{{categoryCourses?.categoryName}}</h4>
-        <button ion-button clear>View more</button>
+        <button ion-button clear (click)="routeToCategoryDetails()">View more</button>
       </div>
     </div>
     <ion-scroll scrollX="true" col-9>
