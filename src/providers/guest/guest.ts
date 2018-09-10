@@ -27,11 +27,11 @@ export class GuestProvider {
     })
   }
 
-  getCategoryWithCourses() {
-    return this.http.get(this.apiUrl.getUrl().categoryWithCoursesUrl).map((response: Response) => {
-      return response.json();
-    })
-  }
+  // getCategoryWithCourses() {
+  //   return this.http.get(this.apiUrl.getUrl().categoryWithCoursesUrl).map((response: Response) => {
+  //     return response.json();
+  //   })
+  // }
 
   getTrainingCenters() {
     return this.http.get(this.apiUrl.getUrl().trainingCenters).map((response: Response) => {

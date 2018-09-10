@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {CategoryProvider} from "../../providers/category/category";
+// import {CategoryProvider} from "../../providers/category/category";
 import {LoadingController} from 'ionic-angular';
 import {DatabaseProvider} from "../../providers/database/database";
 import {Storage} from '@ionic/storage';
 // import {HomePage} from './../home/home'
 import {LocationPage} from "../location/location";
+import {SharedProvider} from "../../providers/shared/shared";
 
 @IonicPage()
 @Component({
@@ -18,7 +19,7 @@ export class InterestsPage {
   userCategories: Category[] = [];
   footerStatus: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private category: CategoryProvider, public loadingCtrl: LoadingController, private database: DatabaseProvider, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sharedProvider: SharedProvider, public loadingCtrl: LoadingController, private database: DatabaseProvider, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -34,7 +35,7 @@ export class InterestsPage {
 
     /*call loader and get categories in its success*/
     loader.present().then(() => {
-      this.category.getCategories()
+      this.sharedProvider.getCategories()
         .subscribe((response) => {
             this.serverCategories = response.categories;
             loader.dismiss();

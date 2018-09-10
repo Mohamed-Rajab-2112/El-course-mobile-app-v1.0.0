@@ -11,7 +11,7 @@ import {HomePage} from '../pages/home/home';
 // import {LocationPage} from '../pages/location/location';
 // import {CountryModalPage} from '../pages/country-modal/country-modal';
 import {AlertController} from 'ionic-angular';
-import {DatabaseProvider} from "../providers/database/database";
+// import {DatabaseProvider} from "../providers/database/database";
 import {AuthProvider} from "../providers/auth/auth";
 import {GuestProvider} from "../providers/guest/guest";
 import {Content} from 'ionic-angular';
@@ -35,7 +35,7 @@ export class XsourceApp {
   @ViewChild(Content) content: Content;
   userData: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private database: DatabaseProvider, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private keyboard: Keyboard) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private keyboard: Keyboard) {
     platform.ready().then(() => {
 
       this.rootPage = 'CategoriesPage';
@@ -91,7 +91,7 @@ export class XsourceApp {
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.database.initDb();
+      // this.database.initDb();
       // statusBar.styleDefault();
       splashScreen.hide();
       // this.rootPage = LocationPage;

@@ -83,7 +83,6 @@ export class AuthProvider {
 
   setUserData(value) {
     if (!value) {
-      alert('will remove user data');
       this.storage.remove('userData')
         .then(() => {
           this.userData.next(value);
@@ -101,74 +100,76 @@ export class AuthProvider {
     return new Promise((resolve, reject) => {
       // console.log('will check platform');
       this.utilities.showLoading()
-        .then(() => {
-          this.platform.ready().then((source) => {
-            console.log(source);
-            if (source == 'dom') {
-              this.angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-                .then(res => {
-                  // alert(JSON.stringify(res, null, 3));
-                  this.registerUserData(res, 'facebook', 'web')
+      // .then(() => {
+      this.platform.ready().then((source) => {
+        console.log(source);
+        if (source == 'dom') {
+          this.angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+            .then(res => {
+              // alert(JSON.stringify(res, null, 3));
+              this.registerUserData(res, 'facebook', 'web')
+                .then((userData) => {
+                  this.storeUserInDatabase(userData);
+                  this.setUserData(userData);
+                });
+              this.utilities.hideLoading()
+                .then(() => {
+                  resolve();
+                })
+            })
+            .catch((err) => {
+              console.log(err);
+              this.utilities.hideLoading()
+                .then(() => {
+                  this.utilities.showAlert('Failed', 'Log in Failed, please try again')
+                    .then(() => {
+                      reject();
+                    })
+                })
+            })
+        } else {
+          this.facebook.login(['email', 'public_profile'])
+            .then((res) => {
+              // alert('will start sign in');
+              const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+              firebase.auth().signInWithCredential(facebookCredential)
+                .then((retrievedUserData) => {
+                  alert(JSON.stringify(retrievedUserData, null, 3));
+                  // alert(JSON.stringify(res.providerData, null, 3));
+                  this.registerUserData(retrievedUserData, 'facebook')
                     .then((userData) => {
                       this.storeUserInDatabase(userData);
                       this.setUserData(userData);
                     });
                   this.utilities.hideLoading()
-                    .then(() => {
-                      resolve();
-                    })
-                })
-                .catch((err) => {
-                  console.log(err);
-                  this.utilities.hideLoading()
-                    .then(() => {
-                      this.utilities.showAlert('Failed', 'Log in Failed, please try again')
-                        .then(() => {
-                          reject();
-                        })
-                    })
-                })
-            } else {
-              this.facebook.login(['email', 'public_profile'])
-                .then((res) => {
-                  // alert('will start sign in');
-                  const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-                  firebase.auth().signInWithCredential(facebookCredential).then((res) => {
-                    // alert(JSON.stringify(res, null, 2));
-                    this.registerUserData(res, 'facebook')
-                      .then((userData) => {
-                        this.storeUserInDatabase(userData);
-                        this.setUserData(userData);
-                      });
-                    this.utilities.hideLoading()
-                      .then(() => {
-                        resolve();
-                      })
-                  })
-                    .catch((err) => {
-                      // alert(JSON.stringify(err, Object.getOwnPropertyNames(err)));
-                      this.utilities.hideLoading()
-                        .then(() => {
-                          this.utilities.showAlert('Failed', 'Log in Failed, please try again')
-                            .then(() => {
-                              reject();
-                            })
-                        })
-                    })
+                  // .then(() => {
+                  resolve();
+                  // })
                 })
                 .catch((err) => {
                   // alert(JSON.stringify(err, Object.getOwnPropertyNames(err)));
                   this.utilities.hideLoading()
+                  // .then(() => {
+                  this.utilities.showAlert('Failed', 'Log in Failed, please try again')
                     .then(() => {
-                      this.utilities.showAlert('Failed', 'Log in Failed, please try again')
-                        .then(() => {
-                          reject();
-                        })
+                      reject();
                     })
+                  // })
                 })
-            }
-          })
-        })
+            })
+            .catch((err) => {
+              // alert(JSON.stringify(err, Object.getOwnPropertyNames(err)));
+              this.utilities.hideLoading()
+              // .then(() => {
+              this.utilities.showAlert('Failed', 'Log in Failed, please try again')
+                .then(() => {
+                  reject();
+                })
+              // })
+            })
+        }
+      })
+      // })
     })
   }
 
@@ -276,13 +277,21 @@ export class AuthProvider {
     let data: any;
     return new Promise((resolve, reject) => {
       if (platform == 'mobile') {
-        if (authType == 'facebook' || authType == 'google') {
+        if (authType == 'google') {
           data = {
             uid: userData.uid,
-            // accessToken: userData.stsTokenManager.accessToken,
             name: userData.displayName,
             email: userData.email,
             photo: userData.photoURL,
+            userType: 'student',
+            authType: authType
+          };
+        } else if (authType == 'facebook') {
+          data = {
+            uid: userData.uid,
+            name: userData.displayName,
+            email: userData.email,
+            photo: userData.providerData[0].photoURL,
             userType: 'student',
             authType: authType
           };

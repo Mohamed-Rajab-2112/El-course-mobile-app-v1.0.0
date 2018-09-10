@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {MenuController} from 'ionic-angular';
 
-import {InterestsPage} from "../interests/interests";
+// import {InterestsPage} from "../interests/interests";
 import {StudentProvider} from "../../providers/student/student";
 import {GuestProvider} from "../../providers/guest/guest";
 import {Subscription} from "rxjs";

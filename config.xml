@@ -3,7 +3,7 @@
     <name>Xsource</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.6:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -102,5 +102,6 @@
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <allow-navigation href="http://192.168.1.3:8100" sessionid="a3a5e44f" />
+    <allow-navigation href="http://192.168.1.6:8100" sessionid="af4753a4" />
     <engine name="android" spec="6.3.0" />
 </widget>
