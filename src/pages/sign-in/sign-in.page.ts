@@ -6,6 +6,7 @@ import {AuthProvider} from "../../providers/auth/auth.provider";
 import {UtilitiesProvider} from "../../providers/utilities/utilities.provider";
 import {SignUpPage} from "../sign-up/sign-up.page";
 import {jsonToBuildError} from "@ionic/app-scripts";
+import {ForgotPasswordPagPage} from "../forgot-password-pag/forgot-password-pag";
 
 @IonicPage()
 @Component({
@@ -66,9 +67,17 @@ export class SignInPage {
     this.navCtrl.push('SignUpPage');
   }
 
+  routwToForgotPassword() {
+    this.navCtrl.push('ForgotPasswordPagPage');
+  }
+
   openMenu() {
     // console.log('open menu')
     this.menuCtrl.toggle();
+  }
+
+  bindEmailToSaved(email) {
+    this.auth.currenWrittenEmail = email;
   }
 
 }

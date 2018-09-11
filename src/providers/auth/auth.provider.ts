@@ -15,6 +15,7 @@ import {GooglePlus} from '@ionic-native/google-plus';
 export class AuthProvider {
   // userType = new BehaviorSubject<string>('guest');
   userData = new BehaviorSubject<any>(null);
+  currenWrittenEmail: string = '';
 
   // databaseUserData: any;
 
@@ -310,8 +311,19 @@ export class AuthProvider {
       }
       resolve(data);
     });
-    /*will un-comment when innstall android sdk on mobile*/
-    // this.setUserData(data);
+  }
+
+  sendForgotPasswordEmail(email) {
+    this.utilities.showLoading();
+    this.angularFireAuth.auth.sendPasswordResetEmail(email)
+      .then(() => {
+        this.utilities.hideLoading();
+        alert('email sent sucessfull')
+      })
+      .catch((err) => {
+        this.utilities.hideLoading();
+        alert(err.message)
+      })
   }
 
   storeUserInDatabase(data) {

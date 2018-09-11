@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ForgotPasswordPagPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AuthProvider} from "../../providers/auth/auth.provider";
 
 @IonicPage()
 @Component({
@@ -14,12 +8,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'forgot-password-pag.html',
 })
 export class ForgotPasswordPagPage {
+  email;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authProvider: AuthProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ForgotPasswordPagPage');
+    this.email = this.authProvider.currenWrittenEmail;
+  }
+
+  sendForgotPasswordEmail() {
+    this.authProvider.sendForgotPasswordEmail(this.email);
   }
 
 }

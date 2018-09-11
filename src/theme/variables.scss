@@ -31,11 +31,11 @@ $secondaryColor: #c4d5ed;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary: #6494dd,
-  secondary: $secondaryColor,
-  danger: #f53d3d,
-  light: #f4f4f4,
-  dark: $primaryColor
+        primary: #6494dd,
+        secondary: $secondaryColor,
+        danger: #f53d3d,
+        light: #f4f4f4,
+        dark: $primaryColor
 );
 
 $text-input-highlight-color-valid: $primaryColor;

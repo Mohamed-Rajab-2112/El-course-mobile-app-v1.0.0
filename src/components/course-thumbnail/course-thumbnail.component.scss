@@ -1,32 +1,57 @@
+@import "../../theme/style-utility";
+
 course-thumbnail {
   .course-thumbnail-card {
     margin: 0;
     width: 150px;
     height: 200px;
-    .sub-title, h4 {
-      //display: inline-block;
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden !important;
-      text-overflow: ellipsis;
+    .interested-btn {
+      position: absolute;
+      bottom: 10px;
+      z-index: 10;
     }
-    h4 {
-      text-transform: capitalize;
+    .card-body {
+      position: relative;
+      .sub-title, h4 {
+        //display: inline-block;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+      }
+      h4 {
+        text-transform: capitalize;
+      }
+      .original-price {
+        text-decoration: line-through;
+        color: grey;
+        display: inline;
+        font-size: 0.7em;
+      }
+      .discount-price {
+        font-weight: bold;
+        display: inline;
+        font-size: 1.1em;
+        color: $mid;
+      }
+      .price-container {
+        border-top: 1px solid lightgrey;
+        .currency-code {
+          color: $mid;
+        }
+      }
+      .available-text {
+        color: $dark !important;
+      }
+      .not-available-text {
+        color: $red !important;
+        i {
+          font-size: 0.8em;
+        }
+      }
     }
-    .fake-price {
-      text-decoration: line-through;
-      color: grey;
-      display: inline;
-      font-size: 0.7em;
-    }
-    .price {
-      font-weight: bold;
-      display: inline;
-      font-size: 1.1em;
-      color: $mid;
-    }
-    span {
-      color: $mid;
-    }
+  }
+  .not-available {
+    opacity: 0.6;
   }
 }

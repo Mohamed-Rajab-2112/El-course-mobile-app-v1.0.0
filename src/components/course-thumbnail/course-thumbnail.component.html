@@ -1,21 +1,34 @@
 <ion-card class="course-thumbnail-card">
-    <img [src]="course?.image">
-    <ion-card-content>
-        <h3 class="sub-title">{{course.trainingCenter}}</h3>
-        <h4>{{course?.name}}</h4>
-        <!--<rating style="width: 100%;" class="rating" [(ngModel)]="course.rating"-->
-        <!--readOnly="true"-->
-        <!--max="5"-->
-        <!--&gt;-->
-        <!--</rating>-->
-        <!--this div is a placholder until use rating module-->
-        <!--<div style="height: 50px">-->
 
-        <!--</div>-->
-        <div class="margin-top-40">
-            <h5 class="fake-price">{{course?.originalPrice}}</h5>
-            <h5 class="price">{{course?.discountPrice}}</h5>
-            <span>EGP</span>
-        </div>
-    </ion-card-content>
+
+    <div [ngClass]="!course?.availability ? ['not-available']:''" class="card-body">
+        <img [src]="course?.image">
+        <ion-card-content>
+            <h3 class="sub-title">{{course?.trainingCenter}}</h3>
+            <h4>{{course?.name}}</h4>
+            <p [ngClass]="course?.availability ? ['available-text'] : ['not-available-text']">
+                <i *ngIf="course?.availability" class="fa fa-check-circle-o margin-right-5"></i>
+                <i *ngIf="!course?.availability" class="fa fa-hourglass-2 margin-right-5"></i>
+                <ion-note>{{course?.availability ? 'Available' : 'Coming soon...'}}</ion-note>
+            </p>
+            <!--<rating style="width: 100%;" class="rating" [(ngModel)]="course.rating"-->
+            <!--readOnly="true"-->
+            <!--max="5"-->
+            <!--&gt;-->
+            <!--</rating>-->
+            <!--this div is a placholder until use rating module-->
+            <!--<div style="height: 50px">-->
+
+            <!--</div>-->
+            <div *ngIf="course?.availability" class="price-container margin-top-15 padding-top-5 padding-bottom-15">
+                <h5 class="original-price">{{course?.originalPrice}}</h5>
+                <h5 class="discount-price">{{course?.discountPrice}}</h5>
+                <span class="currency-code">EGP</span>
+            </div>
+        </ion-card-content>
+    </div>
+
+    <ion-row *ngIf="!course?.availability" justify-content-center>
+        <button clear color="primary" class="interested-btn" ion-button>Interested</button>
+    </ion-row>
 </ion-card>
