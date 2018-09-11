@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SortPipe } from './sort/sort';
+import { SortPipe } from './sort/sort.pipe';
 @NgModule({
 	declarations: [SortPipe],
 	imports: [],

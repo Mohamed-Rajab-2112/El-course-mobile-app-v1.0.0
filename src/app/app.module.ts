@@ -6,7 +6,7 @@ import {HttpModule} from '@angular/http';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {SQLite} from "@ionic-native/sqlite";
-import {DatabaseProvider} from '../providers/database/database';
+import {DatabaseProvider} from '../providers/database/database.provider';
 import {IonicStorageModule} from '@ionic/storage';
 import {Geolocation} from '@ionic-native/geolocation';
 import {Keyboard} from '@ionic-native/keyboard';
@@ -14,20 +14,22 @@ import {GooglePlus} from '@ionic-native/google-plus';
 
 /*pipes*/
 import {PipesModule} from '../pipes/pipes.module';
-import {UtilitiesProvider} from '../providers/utilities/utilities';
-import {StudentProvider} from '../providers/student/student';
-import {ApiUrlProvider} from '../providers/api-url/api-url';
-import {GuestProvider} from '../providers/guest/guest';
-import {AuthProvider} from '../providers/auth/auth';
+import {UtilitiesProvider} from '../providers/utilities/utilities.provider';
+import {StudentProvider} from '../providers/student/student.provider';
+import {ApiUrlProvider} from '../providers/api-url/api-url.provider';
+import {GuestProvider} from '../providers/guest/guest.provider';
+import {AuthProvider} from '../providers/auth/auth.provider';
 import {NativeStorage} from '@ionic-native/native-storage';
 import {Facebook} from '@ionic-native/facebook'
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {AngularFireAuthModule} from 'angularfire2/auth';
-import {SharedProvider} from '../providers/shared/shared';
-import {CategoriesProvider} from '../providers/categories/categories';
+import {SharedProvider} from '../providers/shared/shared.provider';
+import {CategoriesProvider} from '../providers/categories/categories.provider';
 import {CategoriesDatabaseLayerProvider} from '../providers/categories-database-layer/categories-database-layer';
+import {CategoriesPage} from "../pages/categories/categories.page";
+import {CategoriesPageModule} from "../pages/categories/categories.page.module";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDYrrCt5GObIKP_IZ3rQSrDtfjoEtx9mrc",
@@ -40,7 +42,8 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    XsourceApp
+    XsourceApp,
+    // CategoriesPage
   ],
   imports: [
     BrowserModule,
@@ -54,11 +57,13 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    CategoriesPageModule,
     IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     XsourceApp,
+    // CategoriesPage
   ],
   providers: [
     Facebook,

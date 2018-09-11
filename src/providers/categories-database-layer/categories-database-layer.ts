@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
-import {ApiUrlProvider} from "../api-url/api-url";
+import {ApiUrlProvider} from "../api-url/api-url.provider";
 import {Observable} from "rxjs/Observable";
-import {SharedProvider} from "../shared/shared";
+import {SharedProvider} from "../shared/shared.provider";
 import {AngularFirestore} from 'angularfire2/firestore';
 
 @Injectable()
@@ -37,14 +37,18 @@ export class CategoriesDatabaseLayerProvider {
     return new Promise((resolve, reject) => {
       let self = this;
       (function recursive() {
-        if (i == listOfCategories.length - 1) {
+        if (i == listOfCategories.length) {
           resolve();
         } else {
-          self.angularFireStore.collection('courses', (ref) => ref.where('categoryId', '==', listOfCategories[i].id))
+          self.angularFireStore.collection('courses', (ref) => ref.where('categoryId', '==', listOfCategories[i].id).orderBy('createdDate').limit(10))
             .valueChanges()
             .subscribe((courses) => {
+
+                // if (courses.length) {
+                //   self.angularFireStore.collection('courses').add(courses[0]);
+                // }
                 self.selectedCategoriesWithCourses.push({
-                  categoryName: listOfCategories[i].name,
+                  category: listOfCategories[i],
                   courses: courses
                 });
                 i++;
@@ -59,3 +63,4 @@ export class CategoriesDatabaseLayerProvider {
   }
 
 }
+

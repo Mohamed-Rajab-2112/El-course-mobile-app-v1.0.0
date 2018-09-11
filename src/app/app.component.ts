@@ -6,28 +6,28 @@ import {NativeStorage} from '@ionic-native/native-storage';
 import {Nav} from 'ionic-angular';
 import {Keyboard} from '@ionic-native/keyboard';
 
-import {HomePage} from '../pages/home/home';
+import {HomePage} from '../pages/home/home.page';
 // import {InterestsPage} from '../pages/interests/interests';
 // import {LocationPage} from '../pages/location/location';
 // import {CountryModalPage} from '../pages/country-modal/country-modal';
 import {AlertController} from 'ionic-angular';
 // import {DatabaseProvider} from "../providers/database/database";
-import {AuthProvider} from "../providers/auth/auth";
-import {GuestProvider} from "../providers/guest/guest";
+import {AuthProvider} from "../providers/auth/auth.provider";
+import {GuestProvider} from "../providers/guest/guest.provider";
 import {Content} from 'ionic-angular';
 
 // import {ModalController, NavParams} from 'ionic-angular';
-import {UtilitiesProvider} from "../providers/utilities/utilities";
-import {CategoriesPage} from "../pages/categories/categories";
-import {TrainingCentersPage} from "../pages/training-centers/training-centers";
-import {SignInPage} from "../pages/sign-in/sign-in";
+import {UtilitiesProvider} from "../providers/utilities/utilities.provider";
+import {CategoriesPage} from "../pages/categories/categories.page";
+import {TrainingCentersPage} from "../pages/training-centers/training-centers.page";
+import {SignInPage} from "../pages/sign-in/sign-in.page";
 
 @Component({
   templateUrl: 'app.html',
 })
 
 export class XsourceApp {
-  rootPage: string;
+  rootPage: any;
   userType: string;
   languages: any[];
   countries: any[];
@@ -38,7 +38,7 @@ export class XsourceApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private keyboard: Keyboard) {
     platform.ready().then(() => {
 
-      this.rootPage = 'CategoriesPage';
+      this.rootPage = CategoriesPage;
 
       /*subscribe to the root page to make it dynamic*/
       /*---------------------------------------------*/

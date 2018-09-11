@@ -1,0 +1,55 @@
+@import "../../theme/style-utility";
+
+category {
+  .category-Container {
+    background-color: white;
+    border: 1px solid $grey;
+    border-right: none;
+    height: 225px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+  }
+  .category-title {
+    background-color: white;
+    box-sizing: border-box;
+    border-right: 1px solid $light;
+    //margin-right: 15px;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: $dark;
+    .category-icon {
+      img {
+        width: 30px;
+      }
+    }
+    h4 {
+      font-size: 0.8em;
+    }
+    button {
+      font-size: 0.8em;
+      height: 2.5rem;
+    }
+  }
+  ion-scroll {
+    height: 225px;
+    .thumbnail-container {
+      height: 225px;
+      course-thumbnail {
+        margin: 7px;
+        &:last-child {
+          padding-right: 5px;
+        }
+        &:first-child {
+          padding-left: 10px;
+        }
+      }
+    }
+    .scroll-content {
+      padding: 0 !important;
+    }
+  }
+
+}

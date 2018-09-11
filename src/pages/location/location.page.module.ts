@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ManuallyLocationPage } from './manually-location';
+import { LocationPage } from './location.page';
 import {InterestsPage} from "../interests/interests.page";
 
 @NgModule({
   declarations: [
-    ManuallyLocationPage,
+    LocationPage,
   ],
   imports: [
-    IonicPageModule.forChild(ManuallyLocationPage),
+    IonicPageModule.forChild(LocationPage),
   ],
   exports: [
-    ManuallyLocationPage
+    LocationPage
   ]
 })
-export class ManuallyLocationPageModule {}
+export class LocationPageModule {}

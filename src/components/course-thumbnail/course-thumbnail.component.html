@@ -1,0 +1,21 @@
+<ion-card class="course-thumbnail-card">
+    <img [src]="course?.image">
+    <ion-card-content>
+        <h3 class="sub-title">{{course.trainingCenter}}</h3>
+        <h4>{{course?.name}}</h4>
+        <!--<rating style="width: 100%;" class="rating" [(ngModel)]="course.rating"-->
+        <!--readOnly="true"-->
+        <!--max="5"-->
+        <!--&gt;-->
+        <!--</rating>-->
+        <!--this div is a placholder until use rating module-->
+        <!--<div style="height: 50px">-->
+
+        <!--</div>-->
+        <div class="margin-top-40">
+            <h5 class="fake-price">{{course?.originalPrice}}</h5>
+            <h5 class="price">{{course?.discountPrice}}</h5>
+            <span>EGP</span>
+        </div>
+    </ion-card-content>
+</ion-card>
