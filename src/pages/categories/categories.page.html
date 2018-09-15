@@ -1,48 +1,52 @@
 <ion-header>
 
-  <ion-navbar color="dark">
+    <ion-navbar color="dark">
 
-    <!--<button ion-button menuToggle>-->
-    <!--<ion-icon name="menu"></ion-icon>-->
-    <!--</button>-->
-    <!--<ion-title>Xsource</ion-title>-->
+        <!--<button ion-button menuToggle>-->
+        <!--<ion-icon name="menu"></ion-icon>-->
+        <!--</button>-->
+        <!--<ion-title>Xsource</ion-title>-->
 
-    <ion-grid>
-      <ion-row align-items-start>
-        <ion-col col-1>
-          <!--<ion-buttons>-->
-          <button menuToggle ion-button>
-            <ion-icon name="menu" class="menu-icon"></ion-icon>
-          </button>
-          <!--</ion-buttons>-->
-        </ion-col>
-        <ion-col align-self-center>
-          <ion-title>
-            <span (click)="openMenu()">Xsource</span>
-          </ion-title>
-        </ion-col>
-      </ion-row>
-      <ion-row justify-content-center>
-        <ion-col col-12>
-          <ion-searchbar
-            [(ngModel)]="myInput"
-            [showCancelButton]="false"
-            (ionInput)="onInput($event)"
-            (ionCancel)="onCancel($event)">
-          </ion-searchbar>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+        <ion-grid>
+            <ion-row align-items-start>
+                <ion-col col-1>
+                    <!--<ion-buttons>-->
+                    <button menuToggle ion-button>
+                        <ion-icon name="menu" class="menu-icon"></ion-icon>
+                    </button>
+                    <!--</ion-buttons>-->
+                </ion-col>
+                <ion-col align-self-center>
+                    <ion-title>
+                        <span (click)="openMenu()">Xsource</span>
+                    </ion-title>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col col-12>
+                    <ion-searchbar
+                            [(ngModel)]="myInput"
+                            [showCancelButton]="false"
+                            (ionInput)="onInput($event)"
+                            (ionCancel)="onCancel($event)">
+                    </ion-searchbar>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
 
-  </ion-navbar>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content class="body">
-  <div style="height: 35px">
-  </div>
+    <div *ngIf="!toggleNetworkError">
+        <div style="height: 35px">
+        </div>
 
-  <category [categoryCourses]="categoryCourses" *ngFor="let categoryCourses of categoriesCourses"></category>
+        <category [categoryCourses]="categoryCourses" *ngFor="let categoryCourses of categoriesCourses"></category>
+    </div>
+
+    <network-error-comp [disableRetryBtn]="disableRetryBtn" *ngIf="toggleNetworkError" (retryAction)="getCategoriesCourses()"></network-error-comp>
 
 </ion-content>

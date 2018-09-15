@@ -21,6 +21,7 @@ import {UtilitiesProvider} from "../providers/utilities/utilities.provider";
 import {CategoriesPage} from "../pages/categories/categories.page";
 import {TrainingCentersPage} from "../pages/training-centers/training-centers.page";
 import {SignInPage} from "../pages/sign-in/sign-in.page";
+import {SharedProvider} from "../providers/shared/shared.provider";
 
 @Component({
   templateUrl: 'app.html',
@@ -35,10 +36,13 @@ export class XsourceApp {
   @ViewChild(Content) content: Content;
   userData: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private keyboard: Keyboard) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private sharedProvider: SharedProvider) {
     platform.ready().then(() => {
 
       this.rootPage = CategoriesPage;
+      this.sharedProvider.checkConnection();
+
+      console.log(this.nav.getActiveChildNavs())
 
       /*subscribe to the root page to make it dynamic*/
       /*---------------------------------------------*/
@@ -76,7 +80,8 @@ export class XsourceApp {
             this.storage.getItem('userData')
               .then((userData) => {
                 // alert(userData);
-                this.userData = userData;
+                this.auth.setUserData(userData)
+                // this.userData = userData;
               })
               .catch((err) => {
                 this.userData = currentUserData;

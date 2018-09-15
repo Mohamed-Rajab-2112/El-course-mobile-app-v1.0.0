@@ -10,7 +10,8 @@ export class GuestProvider {
   }
 
   getFeeds(listOfInterests) {
-    return this.http.get(this.apiUrl.getUrl().feedsCoursesUrl).map((res: Response) => {
+    return this.http.get(this.apiUrl.getUrl().feedsCoursesUrl)
+      .map((res: Response) => {
       return res.json();
     });
   }

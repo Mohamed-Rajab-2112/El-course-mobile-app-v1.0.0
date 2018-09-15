@@ -7,6 +7,8 @@ import {UtilitiesProvider} from "../../providers/utilities/utilities.provider";
 import {Keyboard} from "@ionic-native/keyboard";
 import {AuthProvider} from "../../providers/auth/auth.provider";
 import {SignInPage} from "../sign-in/sign-in.page";
+import {TrainingCenterProvProvider} from "../../providers/training-center-prov/training-center-prov";
+import {CallNumber} from '@ionic-native/call-number';
 
 @IonicPage()
 @Component({
@@ -16,58 +18,58 @@ import {SignInPage} from "../sign-in/sign-in.page";
 export class TrainingCenterDetailsPage {
   trainingCenterDetails: any = {};
   getTrainingCenterByIdSubscribtion: Subscription;
-  // userTypeSubscriptionthis: Subscription;
-  userData: any;
+  userData: any = null;
   userTypeSubscription: Subscription;
   showAskQuestion: boolean;
   @ViewChild(Content) content: Content;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, public loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private auth: AuthProvider) {
+  @ViewChild('phoneFab') phoneFab;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, public loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private auth: AuthProvider, private trainingCenterProvider: TrainingCenterProvProvider, public callNumberProvider: CallNumber) {
   }
-  
+
   ionViewDidLoad() {
     this.getTrainingCenterDetails();
     this.userTypeSubscription = this.auth.userData.subscribe((userData) => {
         this.userData = userData && userData.userType;
-        console.log(userData);
         this.showAskQuestion = !userData || this.userData.userType != 'trainingCenter';
       },
       err => {
         alert(err);
       });
   }
-  
+
   ionViewWillEnter() {
     this.content.resize();
   }
-  
+
   ionViewWillUnload() {
+    this.phoneFab.close();
     this.getTrainingCenterByIdSubscribtion.unsubscribe();
     this.userTypeSubscription.unsubscribe();
   }
-  
+
   getTrainingCenterDetails() {
     this.trainingCenterDetails = {};
-    // let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
-    // loader.present().then(() => {
     this.utilities.showLoading()
-      .then(() => {
-        this.getTrainingCenterByIdSubscribtion = this.guestProvider.getTrainingCenterById(this.navParams.data).subscribe((trainingCenterDetails) => {
-            this.trainingCenterDetails = trainingCenterDetails;
-            this.utilities.hideLoading();
-          },
-          err => {
-            this.utilities.hideLoading();
-          });
-      })
-    // });
+    // .then(() => {
+    console.log(this.navParams.data);
+    this.getTrainingCenterByIdSubscribtion = this.trainingCenterProvider.getTrainingCenterDetailsById(this.navParams.data)
+      .subscribe((trainingCenterDetails) => {
+          console.log(trainingCenterDetails);
+          this.trainingCenterDetails = trainingCenterDetails;
+          this.utilities.hideLoading();
+        },
+        err => {
+          this.utilities.hideLoading();
+        });
+    // })
   }
-  
+
   routeToQuestions($event) {
     if (this.userData) {
       this.navCtrl.push('QuestionsPage', this.trainingCenterDetails.id);
     } else {
-      this.utilities.showAlert("Can't Ask", "Please Sign in first to ask questions.", "prompt", 'Sign In', 'Cancel')
+      this.utilities.showAlert("Log in", "Please Log in first to ask questions.", "prompt", 'Log in', 'Cancel')
         .then(() => {
           this.navCtrl.push('SignInPage');
         })
@@ -76,5 +78,68 @@ export class TrainingCenterDetailsPage {
         });
     }
   }
-  
+
+  checkIfCanCall() {
+    if (!this.userData) {
+      this.utilities.showAlert("Log in", 'Please Log in first to call this training center', 'prompt', 'Log in', 'Cancel')
+        .then(() => {
+          /*state for accepted log in*/
+          this.navCtrl.push('SignInPage');
+        })
+        .catch(() => {
+          /*state for rejected log in*/
+        })
+    }
+  }
+
+  makeCall(number) {
+    this.phoneFab.close();
+    this.callNumberProvider.callNumber(number, false)
+      .then(() => {
+        /*later will be state here to measure number of calls*/
+      })
+      .catch((res) => {
+        // alert(JSON.stringify(res, null, 3))
+        this.utilities.showAlert('Error', 'Error in Calling, please try again later')
+      })
+  }
+
+  openWhatsappChat() {
+    if (this.userData) {
+      if (this.trainingCenterDetails.whatsApp) {
+        window.open('https://wa.me/' + this.trainingCenterDetails.whatsApp)
+      } else {
+        this.utilities.showAlert('Error', "This training center doesn't have whatsApp")
+      }
+    } else {
+      this.utilities.showAlert("Log in", "Please Log in to contact this training center by whatsApp", 'prompt', 'Log in', 'Cancel')
+        .then(() => {
+          this.navCtrl.push('SignInPage');
+          /*state for accepted log in*/
+        })
+        .catch(() => {
+          /*state for rejected log in*/
+        })
+    }
+  }
+
+  openFacebookPage() {
+    if (this.userData) {
+      if (this.trainingCenterDetails.facebookPage) {
+        window.open(this.trainingCenterDetails.facebookPage)
+      } else {
+        this.utilities.showAlert('Error', "This training center doesn't have facebook page")
+      }
+    } else {
+      this.utilities.showAlert("Log in", "Please Log in to View this training center facebook page", 'prompt', 'Log in', 'Cancel')
+        .then(() => {
+          this.navCtrl.push('SignInPage');
+          /*state for accepted log in*/
+        })
+        .catch(() => {
+          /*state for rejected log in*/
+        })
+    }
+  }
+
 }

@@ -3,16 +3,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {XsourceApp} from './app.component';
 import {HttpModule} from '@angular/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import {SQLite} from "@ionic-native/sqlite";
-import {DatabaseProvider} from '../providers/database/database.provider';
 import {IonicStorageModule} from '@ionic/storage';
-import {Geolocation} from '@ionic-native/geolocation';
 import {Keyboard} from '@ionic-native/keyboard';
 import {GooglePlus} from '@ionic-native/google-plus';
-
-/*pipes*/
 import {PipesModule} from '../pipes/pipes.module';
 import {UtilitiesProvider} from '../providers/utilities/utilities.provider';
 import {StudentProvider} from '../providers/student/student.provider';
@@ -28,8 +24,13 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {SharedProvider} from '../providers/shared/shared.provider';
 import {CategoriesProvider} from '../providers/categories/categories.provider';
 import {CategoriesDatabaseLayerProvider} from '../providers/categories-database-layer/categories-database-layer';
-import {CategoriesPage} from "../pages/categories/categories.page";
 import {CategoriesPageModule} from "../pages/categories/categories.page.module";
+import {ComponentsModule} from "../components/components.module";
+import {HttpInterceptorProvider} from '../providers/http-interceptor/http-interceptor';
+import {CoursesProvProvider} from '../providers/courses-prov/courses-prov';
+import { TrainingCenterProvProvider } from '../providers/training-center-prov/training-center-prov';
+import { CoursesDatabaseLayerProvProvider } from '../providers/courses-database-layer-prov/courses-database-layer-prov';
+import { TrainingCentersDatabaseLayerProvProvider } from '../providers/training-centers-database-layer-prov/training-centers-database-layer-prov';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDYrrCt5GObIKP_IZ3rQSrDtfjoEtx9mrc",
@@ -46,12 +47,14 @@ export const firebaseConfig = {
     // CategoriesPage
   ],
   imports: [
+    ComponentsModule,
     BrowserModule,
     IonicModule.forRoot(XsourceApp, {
       scrollAssist: false,
       autoFocusAssist: false,
     }),
     HttpModule,
+    HttpClientModule,
     PipesModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
@@ -84,7 +87,12 @@ export const firebaseConfig = {
     Keyboard,
     SharedProvider,
     CategoriesProvider,
-    CategoriesDatabaseLayerProvider
+    CategoriesDatabaseLayerProvider,
+    HttpInterceptorProvider,
+    CoursesProvProvider,
+    TrainingCenterProvProvider,
+    CoursesDatabaseLayerProvProvider,
+    TrainingCentersDatabaseLayerProvProvider
   ]
 })
 

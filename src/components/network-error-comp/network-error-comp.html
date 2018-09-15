@@ -1,0 +1,18 @@
+<div style="height: 100%" ion-row align-items-center>
+    <div col-12 ion-row justify-content-center>
+        <div col-2>
+            <img src="assets/images/network-error.png">
+        </div>
+        <div ion-row justify-content-center>
+            <div class="network-error-text" ion-col align-items-center>
+                <h5>Oops..</h5>
+                <p>Connection Lost</p>
+            </div>
+        </div>
+    </div>
+    <div col-12 ion-row justify-content-center class="margin-top-35">
+        <button [disabled]="disableRetryBtn" col-6 ion-button (click)="retry()">
+            <span *ngIf="!disableRetryBtn">Reconnect</span>
+            <i *ngIf="disableRetryBtn" class="fa fa-circle-o-notch fa-spin"></i></button>
+    </div>
+</div>

@@ -57,24 +57,28 @@ export class AuthProvider {
     return new Promise((resolve, reject) => {
       this.angularFireAuth.auth.signInWithEmailAndPassword(signInData.email, signInData.password)
         .then((userData) => {
-          console.log(userData);
-          let selectUserByUID = this.angularFireStore.collection('users', (ref) => ref.where('uid', '==', userData.uid));
-          selectUserByUID.valueChanges().subscribe((selectedUsers) => {
-            const selectedUser: any = selectedUsers[0];
-            let data = {
-              uid: selectedUser.uid,
-              name: selectedUser.name,
-              email: selectedUser.email,
-              photo: selectedUser.photo ? selectedUser.photo : 'assets/images/default-user-avatar.png',
-              userType: selectedUser.userType,
-              authType: selectedUser.authType
-            };
-            this.registerUserData(data, selectedUser.authType)
-              .then((userData) => {
-                this.setUserData(userData);
-              });
-            resolve();
-          });
+          console.log(userData.uid);
+          this.angularFireStore
+            .collection('users').ref
+            .where('uid', '==', userData.uid)
+            .get()
+            .then((selectedUsers) => {
+              const selectedUser: any = this.utilities.convertFirebaseObjToRegularObject(selectedUsers)[0];
+              console.log(selectedUsers);
+              let data = {
+                uid: selectedUser.uid,
+                name: selectedUser.name,
+                email: selectedUser.email,
+                photo: selectedUser.photo ? selectedUser.photo : 'assets/images/default-user-avatar.png',
+                userType: selectedUser.userType,
+                authType: selectedUser.authType
+              };
+              this.registerUserData(data, selectedUser.authType)
+                .then((userData) => {
+                  this.setUserData(userData);
+                });
+              resolve();
+            });
         })
         .catch((err) => {
           reject(err);
@@ -318,11 +322,12 @@ export class AuthProvider {
     this.angularFireAuth.auth.sendPasswordResetEmail(email)
       .then(() => {
         this.utilities.hideLoading();
-        alert('email sent sucessfull')
+        // alert('email sent sucessfull')
       })
       .catch((err) => {
         this.utilities.hideLoading();
-        alert(err.message)
+        this.utilities.showAlert('Error', err.message)
+        // alert(err.message)
       })
   }
 

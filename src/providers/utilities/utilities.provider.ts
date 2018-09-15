@@ -5,6 +5,7 @@ import {BehaviorSubject} from "rxjs";
 import {InterestsPage} from "../../pages/interests/interests.page";
 import {animationFrame} from "rxjs/scheduler/animationFrame";
 import {AlertController, LoadingController} from "ionic-angular";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 
 @Injectable()
@@ -13,7 +14,7 @@ export class UtilitiesProvider {
   loaderOptions: any = {};
   loader: any;
   phoneRegex = /^\d+$/;
-
+  pageHasError: any;
 
   constructor(public http: Http, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     this.loaderOptions = {
@@ -78,4 +79,14 @@ export class UtilitiesProvider {
   hideLoading() {
     return this.loader.dismiss();
   }
+
+  convertFirebaseObjToRegularObject(firebaseData) {
+    let convertedData = [];
+    firebaseData.forEach((element) => {
+      convertedData.push(element.data());
+    });
+
+    return convertedData;
+  }
+
 }

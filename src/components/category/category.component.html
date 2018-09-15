@@ -1,18 +1,30 @@
 <div>
-    <ion-row class="category-Container" align-items-center>
-        <div class="category-title capital-letter" col-3>
-            <div>
-                <!--<i [ngClass]="categoryCourses?.categoryIcon" aria-hidden="true"></i>-->
-                <div class="category-icon">
-                    <img [src]="categoryCourses?.category?.icon">
-                </div>
-                <h4>{{categoryCourses?.category?.name}}</h4>
-                <button ion-button clear (click)="routeToCategoryDetails()"
-                        *ngIf="categoryCourses?.courses?.length">View more
-                </button>
-            </div>
+    <div class="margin-left-15 category-title capital-letter">
+
+        <!--<span-->
+        <!--class="margin-right-5 inline-block category-icon"></span>-->
+        <div class="category-icon inline-block">
+        <img [src]="categoryCourses?.category?.icon">
+            <h4 class="inline no-margin-top margin-left-5 no-margin-bottom">{{categoryCourses?.category?.name}}</h4>
         </div>
-        <ion-scroll scrollX="true" col-9>
+        <button ion-button clear (click)="routeToCategoryDetails()"
+                *ngIf="categoryCourses?.courses?.length">more
+        </button>
+    </div>
+    <ion-row class="category-Container" align-items-center>
+        <!--<div class="category-title capital-letter" col-3>-->
+        <!--<div>-->
+        <!--&lt;!&ndash;<i [ngClass]="categoryCourses?.categoryIcon" aria-hidden="true"></i>&ndash;&gt;-->
+        <!--<div class="category-icon">-->
+        <!--<img [src]="categoryCourses?.category?.icon">-->
+        <!--</div>-->
+        <!--<h4>{{categoryCourses?.category?.name}}</h4>-->
+        <!--<button ion-button clear (click)="routeToCategoryDetails()"-->
+        <!--*ngIf="categoryCourses?.courses?.length">View more-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <ion-scroll scrollX="true" col-12>
             <ion-row class="thumbnail-container" nowrap align-items-center>
                 <course-thumbnail [course]="course"
                                   *ngFor="let course of categoryCourses.courses"></course-thumbnail>

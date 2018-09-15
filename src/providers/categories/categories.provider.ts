@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import {ApiUrlProvider} from "../api-url/api-url.provider";
 import {CategoriesDatabaseLayerProvider} from "../categories-database-layer/categories-database-layer";
 import {Observable} from "rxjs/Observable";
+import {Subscription} from "rxjs/Subscription";
 
 /*
   Generated class for the CategoriesProvider provider.
@@ -20,12 +21,14 @@ export class CategoriesProvider {
 
   getCategoryWithCourses() {
     return Observable.create((observer) => {
-      this.categoriesDatabaseLayer.getCategoryWithCourses()
+      const getCategoryWithCoursesSubscription: Subscription = this.categoriesDatabaseLayer.getCategoryWithCourses()
         .subscribe((categoriesWithLayer) => {
             observer.next(categoriesWithLayer)
+            getCategoryWithCoursesSubscription && getCategoryWithCoursesSubscription.unsubscribe();
           },
           err => {
             observer.error(err)
+            getCategoryWithCoursesSubscription && getCategoryWithCoursesSubscription.unsubscribe();
           });
     })
   }

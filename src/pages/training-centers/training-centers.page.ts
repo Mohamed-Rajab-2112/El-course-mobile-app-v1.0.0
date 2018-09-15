@@ -4,6 +4,7 @@ import {GuestProvider} from "../../providers/guest/guest.provider";
 import {TrainingCenterDetailsPage} from "../training-center-details/training-center-details.page";
 import {Subscription} from "rxjs/Subscription";
 import {UtilitiesProvider} from "../../providers/utilities/utilities.provider";
+import {TrainingCenterProvProvider} from "../../providers/training-center-prov/training-center-prov";
 
 @IonicPage()
 @Component({
@@ -16,7 +17,7 @@ export class TrainingCentersPage {
   getAllCentersSubscription: Subscription;
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private guestProvider: GuestProvider, private loadingCtrl: LoadingController, private utilities: UtilitiesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private trainingCenterProvider: TrainingCenterProvProvider, private loadingCtrl: LoadingController, private utilities: UtilitiesProvider) {
   }
 
   ionViewDidLoad() {
@@ -30,16 +31,18 @@ export class TrainingCentersPage {
 
   getAllCenters() {
     // let loader = this.loadingCtrl.create(this.utilities.loaderOptions);
-    this.utilities.showLoading().then(() => {
-      this.getAllCentersSubscription = this.guestProvider.getTrainingCenters().subscribe((trainingCenters) => {
-          this.trainingCenters = trainingCenters;
-          this.utilities.hideLoading();
-        },
-        err => {
-          console.log(err);
-          this.utilities.hideLoading()
-        })
-    })
+    this.utilities.showLoading()
+    // .then(() => {
+    this.getAllCentersSubscription = this.trainingCenterProvider.getAllTrainingCenters().subscribe((trainingCenters) => {
+        console.log(trainingCenters);
+        this.trainingCenters = trainingCenters;
+        this.utilities.hideLoading();
+      },
+      err => {
+        console.log(err);
+        this.utilities.hideLoading()
+      })
+    // })
   }
 
   ionViewWillUnload() {

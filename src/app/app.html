@@ -1,89 +1,93 @@
 <ion-menu [content]="content" presistent="true" [swipeEnabled]="false" type="reveal">
-  <ion-toolbar class="nav-header">
-    <ion-title>
-      <button *ngIf="!userData" ion-button clear (click)="routeToSignIn()" menuClose>Log in</button>
-      <div *ngIf="userData" class="user-data">
-        <ion-row>
-          <div class="photo-container">
-            <img [src]="userData?.photo">
-          </div>
-          <h4 class="sub-title">{{userData?.name}}</h4>
-        </ion-row>
-        <ion-row>
-          <button ion-button clear (click)="signOut()" menuClose>log out</button>
-        </ion-row>
-      </div>
-    </ion-title>
-  </ion-toolbar>
-  <ion-content>
-    <div class="nav-menu">
-      <ion-list no-lines>
-        <!--<ion-list-header>Menu</ion-list-header>-->
-        <button (click)="routeToHome()" class="primary-item" menuClose ion-item
-                *ngIf="!userData || userData.userType == 'student'">
-          <ion-icon name="home"></ion-icon>
-          Home
-        </button>
-        <button class="primary-item" menuClose ion-item *ngIf="userData && userData.userType == 'trainingCenter'">
-          <ion-icon name="home"></ion-icon>
-          TrainingCenterName
-        </button>
-        <button class="primary-item" menuClose ion-item
-                *ngIf="userData">
-          <ion-icon name="notifications"></ion-icon>
-          Notifications
-        </button>
+    <ion-toolbar class="nav-header">
+        <ion-title>
+            <button *ngIf="!userData" ion-button clear (click)="routeToSignIn()" menuClose>Log in</button>
+            <div *ngIf="userData" class="user-data">
+                <ion-row>
+                    <div class="photo-container">
+                        <img [src]="userData?.photo">
+                    </div>
+                    <h4 class="sub-title">{{userData?.name}}</h4>
+                </ion-row>
+                <ion-row>
+                    <button ion-button clear (click)="signOut()" menuClose>log out</button>
+                </ion-row>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+    <ion-content>
+        <div class="nav-menu">
+            <ion-list no-lines>
+                <!--<ion-list-header>Menu</ion-list-header>-->
+                <button (click)="routeToHome()" class="primary-item" menuClose ion-item
+                        *ngIf="!userData || userData.userType == 'student'">
+                    <ion-icon name="home"></ion-icon>
+                    Home
+                </button>
+                <button class="primary-item" menuClose ion-item
+                        *ngIf="userData && userData.userType == 'trainingCenter'">
+                    <ion-icon name="home"></ion-icon>
+                    TrainingCenterName
+                </button>
+                <button class="primary-item" menuClose ion-item
+                        *ngIf="userData">
+                    <ion-icon name="notifications"></ion-icon>
+                    Notifications
+                </button>
 
-        <!--<button class="primary-item" menuClose ion-item (click)="routeToCategories()" >-->
-        <!--<i class="fa fa-th-list" aria-hidden="true"></i>-->
-        <!--Categories-->
-        <!--</button>-->
-        <button (click)="routeToTrainingCenter()" class="primary-item" menuClose ion-item>
-          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          Training Centers
-        </button>
-        <!--<button class="primary-item" menuClose ion-item *ngIf="userData.userType != 'trainingCenter'">-->
-        <!--<ion-icon name="thumbs-up"></ion-icon>-->
-        <!--Interested-->
-        <!--</button>-->
-        <!--<button class="primary-item" menuClose ion-item *ngIf="userData.userType == 'student'">-->
-        <!--<i class="fa fa-id-badge" aria-hidden="true"></i>-->
-        <!--My ID's-->
-        <!--</button>-->
-        <button class="primary-item" menuClose ion-item *ngIf="userData && userData.userType == 'trainingCenter'">
-          <ion-icon name="add-circle"></ion-icon>
-          Publish new Course
-        </button>
-      </ion-list>
-      <!--<div class="menu-divider"></div>-->
+                <!--<button class="primary-item" menuClose ion-item (click)="routeToCategories()" >-->
+                <!--<i class="fa fa-th-list" aria-hidden="true"></i>-->
+                <!--Categories-->
+                <!--</button>-->
+                <button (click)="routeToTrainingCenter()" class="primary-item" menuClose ion-item>
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    Training Centers
+                </button>
+                <!--<button class="primary-item" menuClose ion-item *ngIf="userData.userType != 'trainingCenter'">-->
+                <!--<ion-icon name="thumbs-up"></ion-icon>-->
+                <!--Interested-->
+                <!--</button>-->
+                <!--<button class="primary-item" menuClose ion-item *ngIf="userData.userType == 'student'">-->
+                <!--<i class="fa fa-id-badge" aria-hidden="true"></i>-->
+                <!--My ID's-->
+                <!--</button>-->
+                <button class="primary-item" menuClose ion-item
+                        *ngIf="userData && userData.userType == 'trainingCenter'">
+                    <ion-icon name="add-circle"></ion-icon>
+                    Publish new Course
+                </button>
+            </ion-list>
+            <!--<div class="menu-divider"></div>-->
 
-      <!--<ion-list no-lines>-->
-        <!--<button class="primary-item" menuClose ion-item (click)="routeToCategories()" >-->
-        <!--<i class="fa fa-th-list" aria-hidden="true"></i>-->
-        <!--Categories-->
-        <!--</button>-->
-        <!--<button (click)="routeToTrainingCenter()" class="primary-item" menuClose ion-item>-->
-          <!--<i class="fa fa-graduation-cap" aria-hidden="true"></i>-->
-          <!--Training Centers-->
-        <!--</button>-->
-        <!--<button class="primary-item" menuClose ion-item *ngIf="userData.userType != 'trainingCenter'">-->
-        <!--<ion-icon name="thumbs-up"></ion-icon>-->
-        <!--Interested-->
-        <!--</button>-->
-      <!--</ion-list>-->
+            <!--<ion-list no-lines>-->
+            <!--<button class="primary-item" menuClose ion-item (click)="routeToCategories()" >-->
+            <!--<i class="fa fa-th-list" aria-hidden="true"></i>-->
+            <!--Categories-->
+            <!--</button>-->
+            <!--<button (click)="routeToTrainingCenter()" class="primary-item" menuClose ion-item>-->
+            <!--<i class="fa fa-graduation-cap" aria-hidden="true"></i>-->
+            <!--Training Centers-->
+            <!--</button>-->
+            <!--<button class="primary-item" menuClose ion-item *ngIf="userData.userType != 'trainingCenter'">-->
+            <!--<ion-icon name="thumbs-up"></ion-icon>-->
+            <!--Interested-->
+            <!--</button>-->
+            <!--</ion-list>-->
 
-      <!--<div class="menu-divider"></div>-->
+            <!--<div class="menu-divider"></div>-->
 
-      <ion-item-divider></ion-item-divider>
+            <ion-item-divider></ion-item-divider>
 
-      <ion-list no-lines>
-        <button menuClose class="secondry-item" ion-item (click)="promptChooseCountry()">Choose Country</button>
-        <button menuClose class="secondry-item" ion-item (click)="promptChooseLanguage()">Choose Language</button>
-        <button menuClose class="secondry-item" ion-item>Settings</button>
-        <button menuClose class="secondry-item" ion-item>Contact Us</button>
-      </ion-list>
-    </div>
-  </ion-content>
+            <ion-list no-lines>
+                <button menuClose class="secondry-item" ion-item (click)="promptChooseCountry()">Choose Country</button>
+                <button menuClose class="secondry-item" ion-item (click)="promptChooseLanguage()">Choose Language
+                </button>
+                <button menuClose class="secondry-item" ion-item>Settings</button>
+                <button menuClose class="secondry-item" ion-item>Contact Us</button>
+            </ion-list>
+        </div>
+    </ion-content>
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content></ion-nav>
+

@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "4.4.3",
     "@angular/router": "4.4.3",
     "@angular/tsc-wrapped": "^4.4.6",
+    "@ionic-native/call-number": "^4.12.2",
     "@ionic-native/core": "4.3.0",
     "@ionic-native/facebook": "^4.5.3",
     "@ionic-native/geolocation": "^4.4.0",
@@ -35,6 +36,7 @@
     "@types/node": "8.0.19 ",
     "angularfire2": "^5.0.0-rc.6",
     "autoprefixer": "^8.1.0",
+    "call-number": "^1.0.1",
     "cordova-android": "6.3.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^1.10.1",
@@ -81,7 +83,8 @@
       },
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "xsource-a0e3f"
-      }
+      },
+      "mx.ferreyra.callnumber": {}
     },
     "platforms": [
       "android"

@@ -5,8 +5,19 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ApiUrlProvider {
   private _baseUrl = 'assets/json/';
+  private _firebaseBaseUrl = 'https://firestore.googleapis.com/v1beta1/projects/xsource-a0e3f/databases/(default)/documents/';
+
   constructor(public http: Http) {
+    // this.getCoursesTEST()
+    //   .subscribe((res) => console.log(res))
   }
+
+  // getCoursesTEST() {
+  //   return this.http.get(this._firebaseBaseUrl + 'courses/5e8CJWpHQs6PLA1yhifR')
+  //     .map((res) => {
+  //       return res.json();
+  //     })
+  // }
 
   getUrl() {
     return {

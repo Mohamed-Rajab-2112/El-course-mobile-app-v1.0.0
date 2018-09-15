@@ -31,4 +31,6 @@ interface TrainingCenter {
  longitude: number;
  altitude: number;
  email: string;
+ whatsapp number: number;
+ facebook page
  */
