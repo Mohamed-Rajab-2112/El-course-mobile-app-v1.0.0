@@ -11,9 +11,9 @@ export class TrainingCenterProvProvider {
   constructor(public http: Http, private trainingCenterDatabaseLayer: TrainingCentersDatabaseLayerProvProvider) {
   }
 
-  getAllTrainingCenters() {
+  getAllTrainingCenters(lastLoadedTrainingCenter?) {
     return Observable.create((observer) => {
-      this.trainingCenterDatabaseLayer.getAllTrainingCenters()
+      this.trainingCenterDatabaseLayer.getAllTrainingCenters(lastLoadedTrainingCenter)
         .then((trainingCenters) => {
             observer.next(trainingCenters)
           },
@@ -33,6 +33,18 @@ export class TrainingCenterProvProvider {
           err => {
             observer.error(err)
           })
+    })
+  }
+
+  getCoursesByTrainingCenterId(trainingCenterId) {
+    return Observable.create((observer) => {
+      this.trainingCenterDatabaseLayer.getCoursesByTrainingCenterId(trainingCenterId)
+        .then((courses) => {
+          observer.next(courses);
+        })
+        .catch((err) => {
+          observer.error(err);
+        })
     })
   }
 

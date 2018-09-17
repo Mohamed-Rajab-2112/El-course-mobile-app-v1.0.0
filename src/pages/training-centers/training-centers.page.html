@@ -18,9 +18,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="body">
 
-    <ion-list>
+    <ion-list *ngIf="networkStatus">
         <button ion-item *ngFor="let trainingCenter of trainingCenters"
                 (click)="routeToTrainingCenterDetails($event, trainingCenter.id)">
             <ion-row>
@@ -44,6 +44,13 @@
                 </div>
             </ion-row>
         </button>
+
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles">
+            <ion-infinite-scroll-content>
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </ion-list>
+
+    <network-error-comp *ngIf="!networkStatus" (retryAction)="ionViewDidLoad()"></network-error-comp>
 
 </ion-content>

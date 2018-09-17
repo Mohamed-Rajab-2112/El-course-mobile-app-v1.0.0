@@ -18,7 +18,7 @@ export class CategoriesDatabaseLayerProvider {
 
   getCategoryWithCourses() {
     return Observable.create((observer) => {
-      const getCategoriesSubscription = this.sharedProvider.getCategories()
+      const getCategoriesSubscription = this.getCategoriesByLimit(2, this.selectedCategoriesWithCourses[this.selectedCategoriesWithCourses.length - 1])
         .subscribe((categories) => {
             this._getCourseByCategoryIdForListOfCategories(categories, 0)
               .then(() => {
@@ -26,7 +26,7 @@ export class CategoriesDatabaseLayerProvider {
                 getCategoriesSubscription && getCategoriesSubscription.unsubscribe()
               })
               .catch((err) => {
-                observer.error(err)
+                observer.error(err);
                 getCategoriesSubscription && getCategoriesSubscription.unsubscribe()
               })
           },
@@ -44,7 +44,7 @@ export class CategoriesDatabaseLayerProvider {
       (function recursive() {
         if (i == listOfCategories.length) {
           coursesSubscription && coursesSubscription.unsubscribe();
-          if (self.selectedCategoriesWithCourses.length) {
+          if (listOfCategories.length) {
             resolve();
           } else {
             reject();
@@ -106,6 +106,29 @@ export class CategoriesDatabaseLayerProvider {
     });
   }
 
+  getCategoriesByLimit(limit = 1, lastCategory = null) {
+    return Observable.create((observer) => {
+      if (lastCategory) {
+        console.log(lastCategory.category);
+        this.angularFireStore.collection('categories', ref => ref.orderBy('name').startAfter(lastCategory.category.name).limit(limit)).valueChanges()
+          .subscribe((categories) => {
+              console.log(categories);
+              observer.next(categories);
+            },
+            err => {
+              observer.error(err)
+            })
+      } else {
+        this.angularFireStore.collection('categories', ref => ref.orderBy('name', 'asc').limit(limit)).valueChanges()
+          .subscribe((categories) => {
+              observer.next(categories);
+            },
+            err => {
+              observer.error(err)
+            })
+      }
+    })
+  }
 
 }
 

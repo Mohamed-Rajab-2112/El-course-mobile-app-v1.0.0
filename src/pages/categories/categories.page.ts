@@ -19,9 +19,12 @@ import {SharedProvider} from "../../providers/shared/shared.provider";
 export class CategoriesPage {
   categoriesCoursesSubscription: Subscription;
   connectionStatusSubscription: Subscription;
-  categoriesCourses: any[];
+  countSubscription: Subscription;
+  categoriesCount: number;
+  categoriesCourses: any[] = [];
   @ViewChild(Content) content: Content;
-  toggleNetworkError: boolean;
+  networkStatus: boolean = true;
+  networkStatusView: boolean = true;
   disableRetryBtn: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, private menuCtrl: MenuController, private loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private categoriesProvider: CategoriesProvider, private sharedProvider: SharedProvider) {
@@ -29,57 +32,88 @@ export class CategoriesPage {
   }
 
   ionViewDidLoad() {
-    // this.utilities.showLoading();
-    this.getCategoriesCourses();
+    this.sharedProvider.checkConnection();
+    this.utilities.showLoading();
+    this.subscribeToCounts();
+    this.getCategoriesCourses()
+      .catch(() => {
+        this.networkStatusView = false;
+      })
   }
 
-  ionViewWillUnload() {
+  ionViewWillLeave() {
+    // console.log('leave');
     this.categoriesCoursesSubscription && this.categoriesCoursesSubscription.unsubscribe();
     this.connectionStatusSubscription && this.connectionStatusSubscription.unsubscribe();
+
+    this.content.scrollToTop();
   }
 
   ionViewWillEnter() {
+    this.subscribeToNetworkStatus();
     this.content.resize();
   }
 
-  subscribeToConnectionStatus() {
-    // this.connectionStatusSubscription && this.connectionStatusSubscription.unsubscribe();
-    // this.connectionStatusSubscription = this.sharedProvider.connectioStatus
-    //   .subscribe((status) => {
-    //     console.log(status);
-    //     if (status) {
-    //       // this.utilities.showLoading();
-    //       // this.getCategoriesCourses();
-    //       // this.toggleNetworkError = false;
-    //       // this.connectionStatusSubscription && this.connectionStatusSubscription.unsubscribe();
-    //     }
-    //   });
+
+  subscribeToCounts() {
+    this.countSubscription = this.sharedProvider.counts
+      .subscribe((counts) => {
+        if (counts) {
+          this.categoriesCount = counts.categoriesCount;
+        }
+      })
+  }
+
+  subscribeToNetworkStatus() {
+    setTimeout(() => {
+      this.connectionStatusSubscription = this.sharedProvider.connectionStatus
+        .subscribe((networkStatus) => {
+          console.log(networkStatus);
+          this.networkStatus = networkStatus;
+        });
+    }, 1000)
   }
 
   getCategoriesCourses() {
     console.log('getting');
-    this.disableRetryBtn = true;
-    // this.categoriesCoursesSubscription && this.categoriesCoursesSubscription.unsubscribe();
-    this.categoriesCoursesSubscription = this.categoriesProvider.getCategoryWithCourses()
-      .subscribe((categoriesCourses) => {
-          // alert(JSON.stringify(categoriesCourses, null, 3))
-        console.log(categoriesCourses);
-          this.categoriesCourses = categoriesCourses;
-          // this.utilities.hideLoading();
-          this.toggleNetworkError = false;
-          this.disableRetryBtn = false;
-          this.categoriesCoursesSubscription && this.categoriesCoursesSubscription.unsubscribe();
-        },
-        err => {
-          console.log(err);
-          // this.utilities.showAlert('Error', err.message);
-          // alert('error')
-          this.subscribeToConnectionStatus();
-          this.utilities.hideLoading();
-          this.toggleNetworkError = true;
-          this.disableRetryBtn = false;
-          this.categoriesCoursesSubscription && this.categoriesCoursesSubscription.unsubscribe();
+    return new Promise((resolve, reject) => {
+      this.categoriesCoursesSubscription = this.categoriesProvider.getCategoryWithCourses()
+        .subscribe((categoriesCourses) => {
+            this.categoriesCourses = categoriesCourses;
+            this.utilities.hideLoading();
+            this.disableRetryBtn = false;
+            this.categoriesCoursesSubscription && this.categoriesCoursesSubscription.unsubscribe();
+            resolve();
+          },
+          err => {
+            console.log(err);
+            this.utilities.hideLoading();
+            this.disableRetryBtn = false;
+            this.categoriesCoursesSubscription && this.categoriesCoursesSubscription.unsubscribe();
+            reject();
+          })
+    });
+  }
+
+  reConnect() {
+    if (this.networkStatus) {
+      this.disableRetryBtn = true;
+      this.getCategoriesCourses()
+        .then(() => {
+          this.networkStatusView = true;
         })
+    }
+  }
+
+  loadMore(e) {
+    console.log(e);
+    this.networkStatus && this.getCategoriesCourses()
+      .then(() => {
+        e.complete();
+        if (this.categoriesCourses.length == this.categoriesCount) {
+          e.enable(false);
+        }
+      })
   }
 
   routeToCategoryDetails() {

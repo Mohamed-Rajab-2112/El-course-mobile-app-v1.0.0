@@ -4,11 +4,11 @@
         <!--<span-->
         <!--class="margin-right-5 inline-block category-icon"></span>-->
         <div class="category-icon inline-block">
-        <img [src]="categoryCourses?.category?.icon">
+            <img [src]="categoryCourses?.category?.icon">
             <h4 class="inline no-margin-top margin-left-5 no-margin-bottom">{{categoryCourses?.category?.name}}</h4>
         </div>
         <button ion-button clear (click)="routeToCategoryDetails()"
-                *ngIf="categoryCourses?.courses?.length">more
+                *ngIf="(categoryCourses?.courses?.length >= 10) || hasMoreButtonByDefault">more
         </button>
     </div>
     <ion-row class="category-Container" align-items-center>

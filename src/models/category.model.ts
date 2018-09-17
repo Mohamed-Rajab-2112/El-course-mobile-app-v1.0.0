@@ -12,4 +12,5 @@ export interface Category {
  id: number;
  name: string;
  count: number;
+ mainCategoryId: number; //the main category id
  */

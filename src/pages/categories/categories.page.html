@@ -40,13 +40,24 @@
 
 
 <ion-content class="body">
-    <div *ngIf="!toggleNetworkError">
+
+    <div *ngIf="networkStatusView">
         <div style="height: 35px">
         </div>
 
         <category [categoryCourses]="categoryCourses" *ngFor="let categoryCourses of categoriesCourses"></category>
+
+
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles">
+            <ion-infinite-scroll-content>
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
     </div>
 
-    <network-error-comp [disableRetryBtn]="disableRetryBtn" *ngIf="toggleNetworkError" (retryAction)="getCategoriesCourses()"></network-error-comp>
+    <network-error-comp [disableRetryBtn]="disableRetryBtn" *ngIf="!networkStatusView"
+                        (retryAction)="reConnect()"></network-error-comp>
+
+    <!--<button ion-button (click)="loadMore()">more</button>-->
 
 </ion-content>

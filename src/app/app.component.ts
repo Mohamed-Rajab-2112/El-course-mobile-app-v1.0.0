@@ -37,12 +37,11 @@ export class XsourceApp {
   userData: any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private storage: NativeStorage, private auth: AuthProvider, private alertCtrl: AlertController, private guestProvider: GuestProvider, private utilitiesProvider: UtilitiesProvider, private sharedProvider: SharedProvider) {
+
     platform.ready().then(() => {
-
       this.rootPage = CategoriesPage;
-      this.sharedProvider.checkConnection();
 
-      console.log(this.nav.getActiveChildNavs())
+      this.sharedProvider.getCounts();
 
       /*subscribe to the root page to make it dynamic*/
       /*---------------------------------------------*/

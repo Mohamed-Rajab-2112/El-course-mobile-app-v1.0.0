@@ -9,6 +9,7 @@ import {AuthProvider} from "../../providers/auth/auth.provider";
 import {SignInPage} from "../sign-in/sign-in.page";
 import {TrainingCenterProvProvider} from "../../providers/training-center-prov/training-center-prov";
 import {CallNumber} from '@ionic-native/call-number';
+import {SharedProvider} from "../../providers/shared/shared.provider";
 
 @IonicPage()
 @Component({
@@ -21,21 +22,26 @@ export class TrainingCenterDetailsPage {
   userData: any = null;
   userTypeSubscription: Subscription;
   showAskQuestion: boolean;
+  networkStatus: boolean;
   @ViewChild(Content) content: Content;
   @ViewChild('phoneFab') phoneFab;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, public loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private auth: AuthProvider, private trainingCenterProvider: TrainingCenterProvProvider, public callNumberProvider: CallNumber) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private guestProvider: GuestProvider, public loadingCtrl: LoadingController, private utilities: UtilitiesProvider, private auth: AuthProvider, private trainingCenterProvider: TrainingCenterProvProvider, public callNumberProvider: CallNumber, private sharedProvider: SharedProvider) {
   }
 
   ionViewDidLoad() {
-    this.getTrainingCenterDetails();
-    this.userTypeSubscription = this.auth.userData.subscribe((userData) => {
-        this.userData = userData && userData.userType;
-        this.showAskQuestion = !userData || this.userData.userType != 'trainingCenter';
-      },
-      err => {
-        alert(err);
-      });
+    this.networkStatus = this.sharedProvider.connectionStatus.value;
+    if (this.networkStatus) {
+      this.getTrainingCenterDetails();
+      this.getCoursesByTrainingCenter();
+      this.userTypeSubscription = this.auth.userData.subscribe((userData) => {
+          this.userData = userData && userData.userType;
+          this.showAskQuestion = !userData || this.userData.userType != 'trainingCenter';
+        },
+        err => {
+          alert(err);
+        });
+    }
   }
 
   ionViewWillEnter() {
@@ -44,8 +50,8 @@ export class TrainingCenterDetailsPage {
 
   ionViewWillUnload() {
     this.phoneFab.close();
-    this.getTrainingCenterByIdSubscribtion.unsubscribe();
-    this.userTypeSubscription.unsubscribe();
+    this.getTrainingCenterByIdSubscribtion && this.getTrainingCenterByIdSubscribtion.unsubscribe();
+    this.userTypeSubscription && this.userTypeSubscription.unsubscribe();
   }
 
   getTrainingCenterDetails() {
@@ -61,8 +67,20 @@ export class TrainingCenterDetailsPage {
         },
         err => {
           this.utilities.hideLoading();
+          this.networkStatus = false;
         });
     // })
+  }
+
+  getCoursesByTrainingCenter() {
+    this.trainingCenterProvider.getCoursesByTrainingCenterId(this.navParams.data)
+      .subscribe((courses) => {
+          this.trainingCenterDetails.courses = courses;
+        },
+        err => {
+          this.utilities.hideLoading();
+          this.networkStatus = false;
+        })
   }
 
   routeToQuestions($event) {
